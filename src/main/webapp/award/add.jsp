@@ -18,8 +18,6 @@
 <div style="width: 900px;height: auto;margin: 0 auto">
     <div class="easyui-panel" title="获奖详情申请" style="width: 900px;height: auto;">
         <form>
-
-
             <table class="table-view" align="center" width="47%">
                 <div style="margin: 39px;">
                     <tr>

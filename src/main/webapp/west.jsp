@@ -88,10 +88,10 @@
     </div>
     <div title="人员管理" iconCls="icon-man" style="overflow: auto;padding: 10px;">
         <div class="menu-last">
-            <a href="#" class="easyui-linkbutton" onclick="addTab('用户列表','')">用户列表</a>
+            <a href="#" class="easyui-linkbutton" onclick="addTab('用户列表','userManageUI/userList')">用户列表</a>
         </div>
         <div class="menu-last">
-            <a href="#" class="easyui-linkbutton" onclick="addTab('用户添加','')">用户添加</a>
+            <a href="#" class="easyui-linkbutton" onclick="addTab('用户添加','userManageUI/userAdd')">用户添加</a>
         </div>
     </div>
     <div title="个人信息管理" iconCls="icon-mini-edit" selected="true" style="padding:10px;">
