@@ -18,43 +18,62 @@
     <script type="application/javascript" src="/ui/sdutoa.js"></script>
 </head>
 <body>
-
 <div style="width: 900px;height: auto;margin: 0 auto">
-    <div class="easyui-panel" title="用户添加" style="width: 900px;height: auto;">
-        <table class="table-view" align="center" width="47%">
-            <div>
-                <label >工号: </label>
-                <input class="easyui-validatebox" type="text" name="employeenum" data-options="required:true" />
+        <div class="messager-body" style="width: auto;height: auto;margin: 0 auto">
+            <div class="messager-input" style="height: 56px; margin: 10px;">
+                <p align="center" style="font-size: 16px;">
+                   <label for="employeenum" >工&nbsp;&nbsp;号: </label>
+                    <input id="employeenum" class="easyui-textbox" style="width: 300px;height: 32px"/>
+                </p>
             </div>
-            <div>
-                <label >用户名: </label>
-                <input class="easyui-validatebox" type="text" name="name" data-options="validType:'email'" />
+            <div class="messager-input" style="height: 56px; margin: 10px;">
+                <p align="center" style="font-size: 16px;">
+                    <label for="username" >用户名: </label>
+                    <input id="username" class="easyui-textbox" style="width: 300px;height: 32px"/>
+                </p>
             </div>
-            <div>
-                <label >角色: </label>
-                <input id="roleSelect" class="easyui-combobox"
-                       name="role"
-                       data-options="
-                       valueField:'rid',
-                       textField:'role',
-                       url:'${pageContext.request.contextPath}/public/rddl'" />
-                <%--<input id="cc" class="easyui-combobox" name="dept"--%>
-                       <%--data-options="valueField:'id',textField:'text',url:'get_data.php'" />--%>
+            <div class="messager-input" style="height: 56px; margin: 10px;">
+                <p align="center" style="font-size: 16px;">
+                    <label for="roleSelect" >角&nbsp;&nbsp;色: </label>
+                    <input id="roleSelect" class="easyui-combobox"
+                           name="role"
+                           data-options="
+                           valueField:'rid',
+                           textField:'role',
+                           width:300,
+                           url:'${pageContext.request.contextPath}/public/rddl'" />
+                </p>
             </div>
-            <div>
-                <label >系别: </label>
-                <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+            <div class="messager-input" style="height: 56px; margin: 10px;">
+                <p align="center" style="font-size: 16px;">
+                    <label for="depSelect" >系&nbsp;&nbsp;别: </label>
+                    <input id="depSelect" class="easyui-combobox"
+                           name="dep"
+                           data-options="
+                           valueField:'deptid',
+                           textField:'dep',
+                           width:300,
+                           url:'${pageContext.request.contextPath}/public/dddl'" />
+                </p>
             </div>
-            <div>
-                <label >邮箱: </label>
-                <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+            <div class="messager-input" style="height: 56px; margin: 10px;">
+                <p align="center" style="font-size: 16px;">
+                    <label for="email" >邮&nbsp;&nbsp;箱: </label>
+                    <input id="email" class="easyui-textbox" style="width: 300px;height: 32px"/>
+                </p>
             </div>
-            <div>
-                <label >手机号: </label>
-                <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+            <div class="messager-input" style="height: 56px; margin: 10px;">
+                <p align="center" style="font-size: 16px;">
+                    <label for="phone" >手机号: </label>
+                    <input id="phone" class="easyui-textbox" style="width: 300px;height: 32px"/>
+                </p>
             </div>
-        </table>
-    </div>
+            <div class="messager-button" style="height: 56px; margin: 10px;">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="subNewUser()">
+                    <span style="font-size: 16px">保存</span>
+                </a>
+            </div>
+        </div>
 </div>
 
 

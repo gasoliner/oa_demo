@@ -1,3 +1,4 @@
+
 .panel {
   overflow: hidden;
   text-align: left;
@@ -670,7 +671,7 @@
 }
 .combobox-item,
 .combobox-group {
-  font-size: 12px;
+  font-size: 16px;
   padding: 3px;
   padding-right: 0px;
 }
@@ -2180,7 +2181,7 @@
 }
 .slider-v .slider-rule span {
   width: 5px;
-  height: 'auto';
+  height: auto;
   border-left: 0;
   border-width: 1px 0 0 0;
   border-style: solid;
@@ -2464,7 +2465,7 @@
   margin-bottom: 5px;
 }
 .messager-body .messager-input {
-  width: 100%;
+  width: 80%;
   padding: 1px 0;
   border: 1px solid #cbc7bd;
 }

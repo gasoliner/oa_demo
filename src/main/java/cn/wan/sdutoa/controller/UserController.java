@@ -2,6 +2,7 @@ package cn.wan.sdutoa.controller;
 
 import cn.wan.sdutoa.po.DataGrid;
 import cn.wan.sdutoa.service.UserService;
+import cn.wan.sdutoa.vo.VoUser;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,5 +27,18 @@ public class UserController {
         dataGrid.setTotal(userService.countAllUser());
         dataGrid.setRows(userService.userList(page,rows));
         return JSON.toJSONString(dataGrid);
+    }
+
+    @RequestMapping(value = "/addition")
+    @ResponseBody
+    public String userAdd(VoUser voUser)throws Exception{
+        System.out.println(voUser);
+        return userService.userAdd(voUser);
+    }
+
+    @RequestMapping(value = "/personalInfo")
+    @ResponseBody
+    public String personalInfoUpdate(VoUser voUser) throws Exception {
+        return userService.userUpdate(voUser);
     }
 }

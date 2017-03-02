@@ -4,4 +4,8 @@
   <select id="getRoleDDL" resultType="role">
     SELECT rid,role FROM jsj_role
   </select>
+
+  <select id="getDependentDDL" resultType="dependent">
+    SELECT deptid,dep FROM jsj_dep
+  </select>
 </mapper>

@@ -110,4 +110,21 @@ public class JsjUser {
     public void setRole(String role) {
         this.role = role == null ? null : role.trim();
     }
+
+    @Override
+    public String toString() {
+        return "JsjUser{" +
+                "uid=" + uid +
+                ", employeenum='" + employeenum + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
+                ", deptid=" + deptid +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", roleidsstr='" + roleidsstr + '\'' +
+                ", locked=" + locked +
+                ", role='" + role + '\'' +
+                '}';
+    }
 }

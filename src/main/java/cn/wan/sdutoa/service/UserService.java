@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface UserService {
     public List<VoUser> userList (int page, int pageSize) throws Exception;
-    public int userAdd (VoUser voUser) throws Exception;
-    public long countAllUser()throws Exception;
+    public String userAdd (VoUser voUser) throws Exception;
+    public long countAllUser ()throws Exception;
+    public String userUpdate (VoUser voUser) throws Exception;
 }

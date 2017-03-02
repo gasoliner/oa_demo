@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping(value = "/userManageUI",produces = {"application/json;charset=UTF-8"} )
-public class userManageUI {
+public class UserManageUI {
 
 
     @RequestMapping("/userList")

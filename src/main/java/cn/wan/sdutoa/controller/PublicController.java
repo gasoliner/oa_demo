@@ -4,7 +4,6 @@ import cn.wan.sdutoa.service.PublicService;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,5 +23,14 @@ public class PublicController {
         System.out.println(publicService.getRoleDDL());
 
         return JSON.toJSONString(publicService.getRoleDDL());
+    }
+
+    @RequestMapping("/dddl")
+    @ResponseBody
+    public String getDepDDL() throws Exception {
+
+        System.out.println(publicService.getDependentDDL());
+
+        return JSON.toJSONString(publicService.getDependentDDL());
     }
 }

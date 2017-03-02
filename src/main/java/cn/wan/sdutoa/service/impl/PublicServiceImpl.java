@@ -1,6 +1,7 @@
 package cn.wan.sdutoa.service.impl;
 
 import cn.wan.sdutoa.mapper.PublicMapper;
+import cn.wan.sdutoa.po.Dependent;
 import cn.wan.sdutoa.po.Role;
 import cn.wan.sdutoa.service.PublicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,12 @@ import java.util.List;
 public class PublicServiceImpl implements PublicService {
     @Autowired
     PublicMapper publicMapper;
+
     public List<Role> getRoleDDL() throws Exception {
         return publicMapper.getRoleDDL();
+    }
+
+    public List<Dependent> getDependentDDL() throws Exception {
+        return publicMapper.getDependentDDL();
     }
 }

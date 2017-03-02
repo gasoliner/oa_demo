@@ -15,4 +15,5 @@ public class VoUser extends JsjUser {
     public void setDep(String dep) {
         this.dep = dep;
     }
+
 }

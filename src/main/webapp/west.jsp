@@ -61,7 +61,7 @@
             </div>
             <div title="教务管理" iconCls="icon-computer" style="overflow: auto;padding: 10px;">
                 <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('试卷归档管理','')">试卷归档管理</a>
+                    <a href="#" class="easyui-linkbutton" onclick="addTab('试卷归档管理','educationalAdministration/testPaperManage')">试卷归档管理</a>
                 </div>
                 <div class="menu-last">
                     <a href="#" class="easyui-linkbutton" onclick="addTab('实训归档管理','')">实训归档管理</a>
@@ -96,7 +96,7 @@
     </div>
     <div title="个人信息管理" iconCls="icon-mini-edit" selected="true" style="padding:10px;">
         <div class="menu-last">
-            <a href="#" class="easyui-linkbutton" onclick="addTab('个人信息','')">个人信息</a>
+            <a href="#" class="easyui-linkbutton" onclick="addTab('个人信息','personalManageUI/personalInfo')">个人信息</a>
         </div>
         <div class="menu-last">
             <a href="#" class="easyui-linkbutton" onclick="addTab('密码修改','')">密码修改</a>
