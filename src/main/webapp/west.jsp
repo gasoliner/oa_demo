@@ -64,7 +64,7 @@
                     <a href="#" class="easyui-linkbutton" onclick="addTab('试卷归档管理','educationalAdministration/testPaperManage')">试卷归档管理</a>
                 </div>
                 <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('实训归档管理','')">实训归档管理</a>
+                    <a href="#" class="easyui-linkbutton" onclick="addTab('实训归档管理','educationalAdministration/trainingPaperManage')">实训归档管理</a>
                 </div>
                 <div class="menu-last">
                     <a href="#" class="easyui-linkbutton" onclick="addTab('教研论文管理','')">教研论文管理</a>

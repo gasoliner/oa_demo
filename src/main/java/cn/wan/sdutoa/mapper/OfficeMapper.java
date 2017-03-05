@@ -10,5 +10,8 @@ import java.util.List;
 public interface OfficeMapper {
 
 //    试卷归档管理
-    public List<VoQuestionPaper> selectAllTestPaper ();
+    List<VoQuestionPaper> selectAllTestPaper ();
+    void insertTestPaper (VoQuestionPaper voQuestionPaper);
+    void updateTestPaperByIdSelective (VoQuestionPaper voQuestionPaper);
+    void deleteTestPaperById (int qid);
 }

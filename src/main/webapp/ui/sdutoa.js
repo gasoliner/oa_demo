@@ -17,3 +17,43 @@ function subNewUser() {
         alert(backresult);
     })
 }
+function newQpaper() {
+    $("fm").form("clear");
+    $("#qpaperDialog").dialog("open").dialog("setTitle","试卷归档--新建");
+    url = "/office/testPaper/addition";
+}
+function editQpaper() {
+    var row = $("#dg").datagrid("getSelected");
+    if (row){
+        $("#qpaperDialog").dialog("open").dialog("setTitle","试卷归档--编辑");
+        $("#fm").form("load",row);
+        url = "/office/testPaper/updates/"+row.qid;
+    }
+}
+function destroyQpaper() {
+    var row = $("#dg").datagrid("getSelected");
+    if (row){
+        $.messager.confirm("Confirm","确定要删除这条记录吗",function (r) {
+            if (r){
+                $("#dfm").form("submit",{
+                    url:"/office/testPaper/deletion/"+row.qid,
+                    success: function (res) {
+                        alert(res);
+                        $("#qpaperDialog").dialog("close");
+                        $("#dg").datagrid("reload")
+                    }
+                })
+            }
+        })
+    }
+}
+function saveQpaper() {
+    $("#fm").form("submit",{
+        url:url,
+        success: function (res) {
+            alert(res);
+            $("#qpaperDialog").dialog("close");
+            $('#dg').datagrid("reload");
+        }
+    })
+}

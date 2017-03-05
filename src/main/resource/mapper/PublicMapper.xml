@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.wan.sdutoa.mapper.PublicMapper">
+  <resultMap id="dependentResultMap" type="dependent">
+    <id column="ddlCode" javaType="int" property="deptid"/>
+    <result column="ddlName" javaType="String" property="dep"/>
+  </resultMap>
+
   <select id="getRoleDDL" resultType="role">
     SELECT rid,role FROM jsj_role
   </select>
-
-  <select id="getDependentDDL" resultType="dependent">
-    SELECT deptid,dep FROM jsj_dep
+  <select id="getDependentDDL" resultMap="dependentResultMap">
+    SELECT ddlCode,ddlName
+    FROM jsj_systemddl
+    WHERE keyword LIKE 'dept';
   </select>
 </mapper>

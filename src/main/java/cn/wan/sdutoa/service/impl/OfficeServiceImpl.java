@@ -21,12 +21,44 @@ public class OfficeServiceImpl implements OfficeService {
         return JSON.toJSONString(changeOne2Yes_TestPaper(officeMapper.selectAllTestPaper()));
     }
 
+    public String addTestPaper(VoQuestionPaper voQuestionPaper) throws Exception {
+        voQuestionPaper.setIschange("未修改");
+        try{
+            officeMapper.insertTestPaper(voQuestionPaper);
+            return JSON.toJSONString("插入成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return JSON.toJSONString("插入时出错，请稍后再试");
+        }
+    }
+
+    @Override
+    public String updateTestPaperById(VoQuestionPaper voQuestionPaper) throws Exception {
+        voQuestionPaper.setIschange("已修改");
+        try {
+            officeMapper.updateTestPaperByIdSelective(voQuestionPaper);
+            return JSON.toJSONString("更新成功");
+        }catch (Exception e){
+            return JSON.toJSONString("更新失败，请稍后再试");
+        }
+    }
+
+    @Override
+    public String deleteTestPaperById(int qid) throws Exception {
+        try {
+            officeMapper.deleteTestPaperById(qid);
+            return JSON.toJSONString("删除成功");
+        }catch (Exception e){
+            return JSON.toJSONString("删除失败，请稍后再试");
+        }
+    }
+
     public List<VoQuestionPaper> changeOne2Yes_TestPaper (List<VoQuestionPaper> voQuestionPaperList){
         for (VoQuestionPaper v :
                 voQuestionPaperList) {
             switch (v.getPsource()){
-                case 0:v.setSpsource("否");break;
-                case 1:v.setSpsource("是");break;
+                case 1:v.setSpsource("自拟");break;
+                case 2:v.setSpsource("统一命题");break;
             }
             switch (v.getExamineway()){
                 case 1:v.setSexamineway("开卷");break;

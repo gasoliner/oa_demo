@@ -4,4 +4,74 @@
     <select id="selectAllTestPaper" resultType="voQuestionPaper">
         SELECT * FROM jsj_question_paper
     </select>
+    <insert id="insertTestPaper" parameterType="voQuestionPaper">
+        INSERT INTO jsj_question_paper (teacher, classname,
+      course, psource, examineway,
+      num, pnum, analyzes,
+      plan, invigilation,ab,answer,standard,score,comment,schoolyear,ischange)
+    VALUES ( #{teacher},#{classname},#{course},#{psource},
+    #{examineway},#{num},#{pnum},#{analyzes},#{plan},#{invigilation},#{ab},#{answer},#{standard},
+    #{score},#{comment},#{schoolyear},#{ischange})
+    </insert>
+    <update id="updateTestPaperByIdSelective" parameterType="voQuestionPaper">
+        update jsj_question_paper
+            <set>
+                <if test="teacher != null">
+                    teacher = #{teacher},
+                </if>
+                <if test="classname != null">
+                    classname = #{classname},
+                </if>
+                <if test="course != null">
+                    course = #{course},
+                </if>
+                <if test="psource != null">
+                    psource = #{psource},
+                </if>
+                <if test="examineway != null">
+                    examineway = #{examineway},
+                </if>
+                <if test="num != null">
+                    num = #{num},
+                </if>
+                <if test="pnum != null">
+                    pnum = #{pnum},
+                </if>
+                <if test="analyzes != null">
+                    analyzes = #{analyzes},
+                </if>
+                <if test="plan != null">
+                    plan = #{plan},
+                </if>
+                <if test="invigilation != null">
+                    invigilation = #{invigilation},
+                </if>
+                <if test="ab != null">
+                    ab = #{ab},
+                </if>
+                <if test="answer != null">
+                    answer = #{answer},
+                </if>
+                <if test="standard != null">
+                    standard = #{standard},
+                </if>
+                <if test="score != null">
+                    score = #{score},
+                </if>
+                <if test="comment != null">
+                    comment = #{comment},
+                </if>
+                <if test="schoolyear != null">
+                    schoolyear = #{schoolyear},
+                </if>
+                <if test="ischange != null">
+                    ischange = #{ischange},
+                </if>
+            </set>
+            where qid = #{qid}
+    </update>
+    <delete id="deleteTestPaperById" parameterType="int">
+        DELETE FROM jsj_question_paper
+        WHERE qid = #{qid}
+    </delete>
 </mapper>
