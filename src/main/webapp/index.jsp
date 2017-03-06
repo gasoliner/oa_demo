@@ -40,7 +40,10 @@
     <div region="center" title="主体任务区" style="padding:5px;height: auto;">
         <div id="tt" class="easyui-tabs" style="width: 100%;height: 100%;">
             <div title="Home">
-                <div style="height: auto;margin: 20px;" align="right">
+                <div style="height: auto;margin-top: 60px;margin-left: 60px;" align="left">
+                    <iframe allowtransparency="true" frameborder="0" width="565" height="98" scrolling="no" src="//tianqi.2345.com/plugin/widget/index.htm?s=2&z=3&t=1&v=0&d=3&bd=0&k=000000&f=008080&q=1&e=1&a=1&c=54830&w=565&h=98&align=center"></iframe>
+                </div>
+                <div style="height: auto;margin-right: 20px;" align="right">
                     <div class="easyui-calendar" style="width:250px;height:250px;"></div>
                 </div>
             </div>

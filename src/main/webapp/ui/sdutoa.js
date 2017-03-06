@@ -57,3 +57,43 @@ function saveQpaper() {
         }
     })
 }
+function newTpaper() {
+    $("fm").form("clear");
+    $("#tpaperDialog").dialog("open").dialog("setTitle","实训归档--新建");
+    url = "/office/trainingPaper/addition";
+}
+function editTpaper() {
+    var row = $("#dg").datagrid("getSelected");
+    if (row){
+        $("#tpaperDialog").dialog("open").dialog("setTitle","实训归档--编辑");
+        $("#fm").form("load",row);
+        url = "/office/trainingPaper/updates/"+row.tid;
+    }
+}
+function destroyTpaper() {
+    var row = $("#dg").datagrid("getSelected");
+    if (row){
+        $.messager.confirm("Confirm","确定要删除这条记录吗",function (r) {
+            if (r){
+                $("#dfm").form("submit",{
+                    url:"/office/trainingPaper/deletion/"+row.tid,
+                    success: function (res) {
+                        alert(res);
+                        $("#tpaperDialog").dialog("close");
+                        $("#dg").datagrid("reload")
+                    }
+                })
+            }
+        })
+    }
+}
+function saveTpaper() {
+    $("#fm").form("submit",{
+        url:url,
+        success: function (res) {
+            alert(res);
+            $("#tpaperDialog").dialog("close");
+            $('#dg').datagrid("reload");
+        }
+    })
+}

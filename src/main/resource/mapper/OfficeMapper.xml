@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.wan.sdutoa.mapper.OfficeMapper">
+
+    <!--试卷归档管理-->
     <select id="selectAllTestPaper" resultType="voQuestionPaper">
         SELECT * FROM jsj_question_paper
     </select>
@@ -73,5 +75,77 @@
     <delete id="deleteTestPaperById" parameterType="int">
         DELETE FROM jsj_question_paper
         WHERE qid = #{qid}
+    </delete>
+
+    <!--实训归档管理-->
+    <select id="selectAllTrainingPaper" resultType="voTrainingPaper">
+        SELECT * FROM jsj_training_paper
+    </select>
+    <insert id="insertTrainingPaper" parameterType="voTrainingPaper">
+        INSERT INTO jsj_training_paper(
+        teacher,classname,course,psource,examineway,
+        num,tnum,nature,analyzes,plan,standard,score,
+        comment,schoolyear,ischange
+        )VALUES (
+        #{teacher},#{classname},#{course},#{psource},
+        #{examineway},#{num},#{tnum},#{nature},#{analyzes},
+        #{plan},#{standard},#{score},#{comment},#{schoolyear},
+        #{ischange}
+        )
+    </insert>
+    <update id="updateTrainingPaperByIdSelective" parameterType="voTrainingPaper">
+        UPDATE jsj_training_paper
+        <set>
+            <if test="teacher != null">
+                teacher = #{teacher},
+            </if>
+            <if test="classname != null">
+                classname = #{classname},
+            </if>
+            <if test="course != null">
+                course = #{course},
+            </if>
+            <if test="psource != null">
+                psource = #{psource},
+            </if>
+            <if test="examineway != null">
+                examineway = #{examineway},
+            </if>
+            <if test="num != null">
+                num = #{num},
+            </if>
+            <if test="tnum != null">
+                tnum = #{tnum},
+            </if>
+            <if test="nature != null">
+                nature = #{nature},
+            </if>
+            <if test="analyzes != null">
+                analyzes = #{analyzes},
+            </if>
+            <if test="plan != null">
+                plan = #{plan},
+            </if>
+            <if test="standard != null">
+                standard = #{standard},
+            </if>
+            <if test="score != null">
+                score = #{score},
+            </if>
+            <if test="comment != null">
+                comment = #{comment},
+            </if>
+            <if test="schoolyear != null">
+                schoolyear = #{schoolyear},
+            </if>
+            <if test="ischange != null">
+                ischange = #{ischange},
+            </if>
+        </set>
+        WHERE tid = #{tid}
+    </update>
+    <delete id="deleteTrainingPaperById" parameterType="int">
+        DELETE FROM jsj_training_paper
+        WHERE tid = #{tid}
     </delete>
 </mapper>
