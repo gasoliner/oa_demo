@@ -2,6 +2,7 @@ package cn.wan.sdutoa.controller;
 
 import cn.wan.sdutoa.service.OfficeService;
 import cn.wan.sdutoa.vo.VoQuestionPaper;
+import cn.wan.sdutoa.vo.VoTopicPaper;
 import cn.wan.sdutoa.vo.VoTrainingPaper;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,31 @@ public class OfficeController {
 
     @Autowired
     OfficeService officeService;
-//    实训归档管理
+//    教研课题管理
+    @RequestMapping("/topicPaper/list")
+    @ResponseBody
+    public String topicPaperList() throws Exception {
+        return officeService.getTopicPaperList();
+    }
+    @RequestMapping("/topicPaper/addition")
+    @ResponseBody
+    public String topicPaperAddition(VoTopicPaper voTopicPaper) throws Exception {
+        System.out.println("Controller:\t"+voTopicPaper);
+        return officeService.addTopicPaper(voTopicPaper);
+    }
+    @RequestMapping("/topicPaper/updates/{uuid}")
+    @ResponseBody
+    public String topicPaperUpdates(VoTopicPaper voTopicPaper,@PathVariable("uuid") String uuid) throws Exception {
+        voTopicPaper.setUuid(uuid);
+        return officeService.updateTopicPaperByUUID(voTopicPaper);
+    }
+    @RequestMapping("/topicPaper/deletion/{uuid}")
+    @ResponseBody
+    public String topicPaperDeletion(@PathVariable("uuid") String uuid) throws Exception {
+        return officeService.deleteTopicPaperByUUID(uuid);
+    }
+
+    //    实训归档管理
     @RequestMapping("/trainingPaper/list")
     @ResponseBody
     public String trainingPaperList() throws Exception {
@@ -29,7 +54,6 @@ public class OfficeController {
     @RequestMapping("/trainingPaper/addition")
     @ResponseBody
     public String trainingPaperAddition(VoTrainingPaper voTrainingPaper) throws Exception{
-        System.out.println("Controller!!\t:"+voTrainingPaper);
         return officeService.addTrainingPaper(voTrainingPaper);
     }
     @RequestMapping("/trainingPaper/updates/{tid}")

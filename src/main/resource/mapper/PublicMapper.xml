@@ -5,13 +5,24 @@
     <id column="ddlCode" javaType="int" property="deptid"/>
     <result column="ddlName" javaType="String" property="dep"/>
   </resultMap>
+  <resultMap id="schoolYearResultMap" type="frontQuery">
+    <id column="ddlCode" javaType="int" property="syid"/>
+    <result column="ddlName" javaType="String" property="schoolyear"/>
+  </resultMap>
 
   <select id="getRoleDDL" resultType="role">
     SELECT rid,role FROM jsj_role
   </select>
+
   <select id="getDependentDDL" resultMap="dependentResultMap">
     SELECT ddlCode,ddlName
     FROM jsj_systemddl
     WHERE keyword LIKE 'dept';
+  </select>
+
+  <select id="getSchoolYearDDL" resultMap="schoolYearResultMap">
+    SELECT ddlCode,ddlName
+    FROM jsj_systemddl
+    WHERE keyword LIKE 'schoolYear';
   </select>
 </mapper>

@@ -9,6 +9,11 @@ public class FrontQuery {
     private int pageSize;
     private int start;
     private String [] roleDDL;
+    private int syid;
+    private String schoolyear;
+
+    public FrontQuery() {
+    }
 
     public FrontQuery(int start, int pageSize) {
         this.start = start;
@@ -53,5 +58,21 @@ public class FrontQuery {
 
     public void setRoleDDL(String[] roleDDL) {
         this.roleDDL = roleDDL;
+    }
+
+    public int getSyid() {
+        return syid;
+    }
+
+    public void setSyid(int syid) {
+        this.syid = syid;
+    }
+
+    public String getSchoolyear() {
+        return schoolyear;
+    }
+
+    public void setSchoolyear(String schoolyear) {
+        this.schoolyear = schoolyear;
     }
 }

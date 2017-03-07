@@ -1,12 +1,22 @@
 package cn.wan.sdutoa.service;
 
 import cn.wan.sdutoa.vo.VoQuestionPaper;
+import cn.wan.sdutoa.vo.VoTopicPaper;
 import cn.wan.sdutoa.vo.VoTrainingPaper;
 
 /**
  * Created by 万洪基 on 2017/2/27.
  */
 public interface OfficeService {
+
+//    教研课题管理
+    public String getTopicPaperList() throws Exception;
+
+    public String addTopicPaper(VoTopicPaper voTopicPaper) throws Exception;
+
+    public String updateTopicPaperByUUID(VoTopicPaper voTopicPaper) throws Exception;
+
+    public String deleteTopicPaperByUUID(String uuid) throws Exception;
 
 //    试卷归档管理
     public String getTestPaperList() throws Exception;

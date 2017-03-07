@@ -3,12 +3,17 @@ package cn.wan.sdutoa.service.impl;
 import cn.wan.sdutoa.mapper.OfficeMapper;
 import cn.wan.sdutoa.service.OfficeService;
 import cn.wan.sdutoa.vo.VoQuestionPaper;
+import cn.wan.sdutoa.vo.VoTopicPaper;
 import cn.wan.sdutoa.vo.VoTrainingPaper;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 
 /**
  * Created by 万洪基 on 2017/2/27.
@@ -18,7 +23,48 @@ public class OfficeServiceImpl implements OfficeService {
     @Autowired
     OfficeMapper officeMapper;
 
-//    试卷
+
+//    课题
+    @Override
+    public String getTopicPaperList() throws Exception {
+        return JSON.toJSONString(officeMapper.selectAllTopicPaper());
+    }
+
+    @Override
+    public String addTopicPaper(VoTopicPaper voTopicPaper) throws Exception {
+        voTopicPaper.setUuid(UUID.randomUUID().toString());
+        try {
+            officeMapper.insertTopicPaper(voTopicPaper);
+            return JSON.toJSONString("插入成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return JSON.toJSONString("插入失败，请稍后再试");
+        }
+    }
+
+    @Override
+    public String updateTopicPaperByUUID(VoTopicPaper voTopicPaper) throws Exception {
+        try{
+            officeMapper.updateTopicPaperByUUIDSelective(voTopicPaper);
+            return JSON.toJSONString("更新成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return JSON.toJSONString("更新失败，请稍后再试");
+        }
+    }
+
+    @Override
+    public String deleteTopicPaperByUUID(String uuid) throws Exception {
+        try {
+            officeMapper.deleteTopicPaperByUUID(uuid);
+            return JSON.toJSONString("删除成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return JSON.toJSONString("删除失败，请稍后再试");
+        }
+    }
+
+    //    试卷
     public String getTestPaperList() throws Exception {
         return JSON.toJSONString(changeOne2Yes_TestPaper(officeMapper.selectAllTestPaper()));
     }

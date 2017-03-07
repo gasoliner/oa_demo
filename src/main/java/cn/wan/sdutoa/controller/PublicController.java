@@ -19,18 +19,18 @@ public class PublicController {
     @RequestMapping("/rddl")
     @ResponseBody
     public String getRoleDDL() throws Exception {
-
-        System.out.println(publicService.getRoleDDL());
-
         return JSON.toJSONString(publicService.getRoleDDL());
     }
 
     @RequestMapping("/dddl")
     @ResponseBody
     public String getDepDDL() throws Exception {
-
-        System.out.println(publicService.getDependentDDL());
-
         return JSON.toJSONString(publicService.getDependentDDL());
+    }
+
+    @RequestMapping("/syddl")
+    @ResponseBody
+    public String getSchoolYear() throws Exception {
+        return JSON.toJSONString(publicService.getSchoolYearDDL());
     }
 }

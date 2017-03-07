@@ -2,6 +2,7 @@ package cn.wan.sdutoa.service.impl;
 
 import cn.wan.sdutoa.mapper.PublicMapper;
 import cn.wan.sdutoa.po.Dependent;
+import cn.wan.sdutoa.po.FrontQuery;
 import cn.wan.sdutoa.po.Role;
 import cn.wan.sdutoa.service.PublicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,10 @@ public class PublicServiceImpl implements PublicService {
 
     public List<Dependent> getDependentDDL() throws Exception {
         return publicMapper.getDependentDDL();
+    }
+
+    @Override
+    public List<FrontQuery> getSchoolYearDDL() throws Exception {
+        return publicMapper.getSchoolYearDDL();
     }
 }

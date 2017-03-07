@@ -19,4 +19,9 @@ public class educationalAdministrationUI {
     public String trainingPaperManage(){
         return "personalOffice/educationalAdministration/trainingPaperManage";
     }
+
+    @RequestMapping("/topicPaperManage")
+    public String topicPaperManage(){
+        return "personalOffice/educationalAdministration/topicPaperManage";
+    }
 }

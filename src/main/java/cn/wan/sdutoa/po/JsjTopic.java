@@ -1,8 +1,10 @@
 package cn.wan.sdutoa.po;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
-public class JsjTopics {
+public class JsjTopic {
     private String uuid;
 
     private String name;
@@ -13,8 +15,10 @@ public class JsjTopics {
 
     private String member;
 
+    @JSONField(format = "yyyy-MM-dd")
     private Date starttime;
 
+    @JSONField(format = "yyyy-MM-dd")
     private Date endtime;
 
     private String evaluate;
@@ -100,6 +104,23 @@ public class JsjTopics {
     }
 
     public void setSchoolyear(String schoolyear) {
+
         this.schoolyear = schoolyear == null ? null : schoolyear.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "JsjTopic{" +
+                "uuid='" + uuid + '\'' +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", principal='" + principal + '\'' +
+                ", member='" + member + '\'' +
+                ", starttime=" + starttime +
+                ", endtime=" + endtime +
+                ", evaluate='" + evaluate + '\'' +
+                ", gradation='" + gradation + '\'' +
+                ", schoolyear='" + schoolyear + '\'' +
+                '}';
     }
 }

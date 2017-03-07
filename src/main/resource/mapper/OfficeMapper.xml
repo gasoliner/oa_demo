@@ -148,4 +148,56 @@
         DELETE FROM jsj_training_paper
         WHERE tid = #{tid}
     </delete>
+
+    <!--教研课题管理-->
+    <select id="selectAllTopicPaper" resultType="voTopicPaper">
+        SELECT * FROM jsj_topics
+    </select>
+    <insert id="insertTopicPaper" parameterType="voTopicPaper">
+        INSERT INTO jsj_topics(
+        uuid,name,type,principal,member,starttime,endtime,
+        evaluate,gradation,schoolyear
+        )
+        VALUES (
+        #{uuid},#{name},#{type},#{principal},#{member},#{starttime},
+        #{endtime},#{evaluate},#{gradation},#{schoolyear}
+        )
+    </insert>
+    <update id="updateTopicPaperByUUIDSelective" parameterType="voTopicPaper">
+        UPDATE jsj_topics
+        <set>
+            <if test="name != null ">
+                name = #{name},
+            </if>
+            <if test="type != null ">
+                type = #{type},
+            </if>
+            <if test="principal != null ">
+                principal = #{principal},
+            </if>
+            <if test="member != null ">
+                member = #{member},
+            </if>
+            <if test="starttime != null ">
+                starttime = #{starttime},
+            </if>
+            <if test="endtime != null ">
+                endtime = #{endtime},
+            </if>
+            <if test="evaluate != null ">
+                evaluate = #{evaluate},
+            </if>
+            <if test="gradation != null ">
+                gradation = #{gradation},
+            </if>
+            <if test="schoolYear != null ">
+                schoolYear = #{schoolYear},
+            </if>
+        </set>
+        WHERE uuid = #{uuid}
+    </update>
+    <delete id="deleteTopicPaperByUUID" parameterType="string">
+        DELETE FROM jsj_topics
+        WHERE uuid = #{uuid}
+    </delete>
 </mapper>

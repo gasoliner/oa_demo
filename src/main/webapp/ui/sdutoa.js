@@ -1,3 +1,10 @@
+//重写formatter函数，重新设置时间格式
+// $.fn.datebox.defaults.formatter = function(date){
+//     var y = date.getFullYear();
+//     var m = date.getMonth()+1;
+//     var d = date.getDate();
+//     return y+'-'+m+'-'+d;
+// }
 function perInf1() {
 
     alert("perInf1");
@@ -18,7 +25,7 @@ function subNewUser() {
     })
 }
 function newQpaper() {
-    $("fm").form("clear");
+    $("#fm").form("clear");
     $("#qpaperDialog").dialog("open").dialog("setTitle","试卷归档--新建");
     url = "/office/testPaper/addition";
 }
@@ -58,7 +65,7 @@ function saveQpaper() {
     })
 }
 function newTpaper() {
-    $("fm").form("clear");
+    $("#fm").form("clear");
     $("#tpaperDialog").dialog("open").dialog("setTitle","实训归档--新建");
     url = "/office/trainingPaper/addition";
 }
@@ -94,6 +101,46 @@ function saveTpaper() {
             alert(res);
             $("#tpaperDialog").dialog("close");
             $('#dg').datagrid("reload");
+        }
+    })
+}
+function newTopaper() {
+    $("#fm").form("clear");
+    $("#topaperDialog").dialog("open").dialog("setTitle","教研课题--新建");
+    url = "/office/topicPaper/addition";
+}
+function editTopaper() {
+    var row = $("#dg").datagrid("getSelected");
+    if (row){
+        $("#topaperDialog").dialog("open").dialog("setTitle","教研课题--编辑");
+        $("#fm").form("load",row);
+        url = "/office/topicPaper/updates/"+row.uuid;
+    }
+}
+function destroyTopaper() {
+    var row = $("#dg").datagrid("getSelected");
+    if (row){
+        $.messager.confirm("Confirm","确定要删除这条记录吗",function (r) {
+            if (r){
+                $("#dfm").form("submit",{
+                    url:"/office/topicPaper/deletion/"+row.uuid,
+                    success: function (res) {
+                        alert(res);
+                        $("#topaperDialog").dialog("close");
+                        $("#dg").datagrid("reload")
+                    }
+                })
+            }
+        })
+    }
+}
+function saveTopaper() {
+    $("#fm").form("submit",{
+        url:url,
+        success: function (res) {
+            alert(res);
+            $("#topaperDialog").dialog("close");
+            $("#dg").datagrid("reload");
         }
     })
 }
