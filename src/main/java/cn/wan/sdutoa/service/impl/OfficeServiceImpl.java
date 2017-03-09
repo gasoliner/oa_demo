@@ -2,17 +2,19 @@ package cn.wan.sdutoa.service.impl;
 
 import cn.wan.sdutoa.mapper.OfficeMapper;
 import cn.wan.sdutoa.service.OfficeService;
+import cn.wan.sdutoa.service.PublicService;
+import cn.wan.sdutoa.util.PageUtil;
 import cn.wan.sdutoa.vo.VoQuestionPaper;
+import cn.wan.sdutoa.vo.VoTeachingPaper;
 import cn.wan.sdutoa.vo.VoTopicPaper;
 import cn.wan.sdutoa.vo.VoTrainingPaper;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -22,15 +24,63 @@ import java.util.UUID;
 public class OfficeServiceImpl implements OfficeService {
     @Autowired
     OfficeMapper officeMapper;
+    @Autowired
+    PublicService publicService;
 
+    public String getTeachingPaperList() throws Exception {
+        List<VoTeachingPaper> teachingPaperList = officeMapper.selectAllTeachingPaper();
+        for (VoTeachingPaper v:
+             teachingPaperList) {
+            v.setVoAnnex(PageUtil.setVoAnnexByUUID(v.getUuid()));
+        }
+        return JSON.toJSONString(teachingPaperList);
+    }
 
-//    课题
-    @Override
+    public String addTeachingPaper(VoTeachingPaper voTeachingPaper, HttpServletRequest request, CommonsMultipartFile file) throws Exception {
+        voTeachingPaper.setAnnex(PageUtil.uploadAnnex(request,file,publicService.getSchoolYearBySyid(voTeachingPaper.getSchoolyear()),voTeachingPaper.getTitle(),"paper"));
+        voTeachingPaper.setUuid(UUID.randomUUID().toString());
+        voTeachingPaper.setLevel(1);
+        voTeachingPaper.setType(1);
+        try {
+            officeMapper.insertTeachingPaper(voTeachingPaper);
+            return JSON.toJSONString("插入成功");
+        }catch (Exception e){
+            return "插入失败，请稍后再试";
+        }
+    }
+
+    public String updateTeachingPaperByUUID(VoTeachingPaper voTeachingPaper,HttpServletRequest request, CommonsMultipartFile file) throws Exception {
+        PageUtil.deleteFile(officeMapper.selectTeachingPaperByUUID(voTeachingPaper.getUuid()).getAnnex());
+        voTeachingPaper.setAnnex(PageUtil.uploadAnnex(request,file,publicService.getSchoolYearBySyid(voTeachingPaper.getSchoolyear()),voTeachingPaper.getTitle(),"paper"));
+        try {
+            officeMapper.updateTeachingPaperByUUIDSelective(voTeachingPaper);
+            return JSON.toJSONString("更新成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return JSON.toJSONString("更新失败，请稍后再试");
+        }
+    }
+
+    public String deleteTeachingPaperByUUID(String uuid) throws Exception {
+        PageUtil.deleteFile(officeMapper.selectTeachingPaperByUUID(uuid).getAnnex());
+        try {
+            officeMapper.deleteTeachingPaperByUUID(uuid);
+            return JSON.toJSONString("删除成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return JSON.toJSONString("删除失败，请稍后再试");
+        }
+    }
+
+    public VoTeachingPaper getTeachingPaperByUUID(String uuid) throws Exception {
+        return officeMapper.selectTeachingPaperByUUID(uuid);
+    }
+
+    //    课题
     public String getTopicPaperList() throws Exception {
         return JSON.toJSONString(officeMapper.selectAllTopicPaper());
     }
 
-    @Override
     public String addTopicPaper(VoTopicPaper voTopicPaper) throws Exception {
         voTopicPaper.setUuid(UUID.randomUUID().toString());
         try {
@@ -42,7 +92,6 @@ public class OfficeServiceImpl implements OfficeService {
         }
     }
 
-    @Override
     public String updateTopicPaperByUUID(VoTopicPaper voTopicPaper) throws Exception {
         try{
             officeMapper.updateTopicPaperByUUIDSelective(voTopicPaper);
@@ -53,7 +102,6 @@ public class OfficeServiceImpl implements OfficeService {
         }
     }
 
-    @Override
     public String deleteTopicPaperByUUID(String uuid) throws Exception {
         try {
             officeMapper.deleteTopicPaperByUUID(uuid);
@@ -80,7 +128,6 @@ public class OfficeServiceImpl implements OfficeService {
         }
     }
 
-    @Override
     public String updateTestPaperById(VoQuestionPaper voQuestionPaper) throws Exception {
         voQuestionPaper.setIschange("已修改");
         try {
@@ -91,7 +138,6 @@ public class OfficeServiceImpl implements OfficeService {
         }
     }
 
-    @Override
     public String deleteTestPaperById(int qid) throws Exception {
         try {
             officeMapper.deleteTestPaperById(qid);
@@ -101,12 +147,11 @@ public class OfficeServiceImpl implements OfficeService {
         }
     }
 //    实训
-    @Override
     public String getTrainingPaperList() throws Exception {
         return JSON.toJSONString(changeOne2Yes_TraningPaper(officeMapper.selectAllTrainingPaper()));
     }
 
-    @Override
+    
     public String addTrainingPaper(VoTrainingPaper voTrainingPaper) throws Exception {
         voTrainingPaper.setIschange("未修改");
         try {
@@ -118,7 +163,7 @@ public class OfficeServiceImpl implements OfficeService {
         }
     }
 
-    @Override
+    
     public String updateTrainingPaperById(VoTrainingPaper voTrainingPaper) throws Exception {
         voTrainingPaper.setIschange("已修改");
         try {
@@ -129,7 +174,7 @@ public class OfficeServiceImpl implements OfficeService {
         }
     }
 
-    @Override
+    
     public String deleteTrainingPaperById(int tid) throws Exception {
         try {
             officeMapper.deleteTrainingPaperById(tid);

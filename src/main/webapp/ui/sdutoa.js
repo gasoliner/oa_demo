@@ -144,3 +144,55 @@ function saveTopaper() {
         }
     })
 }
+function newTepaper() {
+    $("#fm").form("clear");
+    $("#tepaperDialog").dialog("open").dialog("setTitle","教研论文--新建");
+    url = "/office/teachingPaper/addition";
+}
+function editTepaper() {
+    var row = $("#dg").datagrid("getSelected");
+    if (row){
+        $("#tepaperDialog").dialog("open").dialog("setTitle","教研论文--编辑");
+        $("#fm").form("clear");
+        $("#fm").form("load",row);
+        url = "/office/teachingPaper/updates/"+row.uuid;
+    }
+}
+function destroyTepaper() {
+    var row = $("#dg").datagrid("getSelected");
+    if (row){
+        $.messager.confirm("Confirm","确定要删除这条记录吗",function (r) {
+            if (r){
+                $("#dfm").form("submit",{
+                    url:"/office/teachingPaper/deletion/"+row.uuid,
+                    success: function (res) {
+                        alert(res);
+                        $("#tepaperDialog").dialog("close");
+                        $("#dg").datagrid("reload")
+                    }
+                })
+            }
+        })
+    }
+}
+function saveTepaper() {
+    $("#fm").form("submit",{
+        url:url,
+        success: function (res) {
+            alert(res);
+            $("#tepaperDialog").dialog("close");
+            $("#dg").datagrid("reload");
+        }
+    })
+}
+function showTePaper(u) {
+    $("#imgDialog").dialog({
+        title:"查看",
+        width: 550,
+        height: 550,
+        closed: false,
+        cache: false,
+        modal: true
+    });
+    $("#imgTePaper").attr("src","/office/teachingPaper/showTePaper/"+u);
+}

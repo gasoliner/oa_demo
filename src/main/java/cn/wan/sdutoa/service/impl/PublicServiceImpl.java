@@ -26,8 +26,21 @@ public class PublicServiceImpl implements PublicService {
         return publicMapper.getDependentDDL();
     }
 
-    @Override
     public List<FrontQuery> getSchoolYearDDL() throws Exception {
         return publicMapper.getSchoolYearDDL();
+    }
+
+    public String getSchoolYearBySyid(String syid) throws Exception {
+        return publicMapper.getSchoolYearBySyid(Integer.parseInt(syid));
+    }
+
+    @Override
+    public List<FrontQuery> getBookLevel() throws Exception {
+        return publicMapper.getBookLevelDDL();
+    }
+
+    @Override
+    public List<FrontQuery> getSearchType() throws Exception {
+        return publicMapper.getSearchTypeDDL();
     }
 }

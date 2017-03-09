@@ -23,13 +23,8 @@
             }
         }
     </script>
-
-
-
 </head>
-
 <body>
-
 <div class="easyui-layout" style="width:100%;height: 723px;">
     <div region="north" split="false" style="width: 100%;height: 50px;border: 0px">
         <jsp:include page="north.jsp"/>

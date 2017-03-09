@@ -14,4 +14,10 @@ public interface PublicMapper {
     List<Dependent> getDependentDDL();
 
     List<FrontQuery> getSchoolYearDDL();
+
+    String getSchoolYearBySyid(int syid);
+
+    List<FrontQuery> getBookLevelDDL();
+
+    List<FrontQuery> getSearchTypeDDL();
 }

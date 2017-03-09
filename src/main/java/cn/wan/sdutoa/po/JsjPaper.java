@@ -1,5 +1,7 @@
 package cn.wan.sdutoa.po;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class JsjPaper {
@@ -13,6 +15,7 @@ public class JsjPaper {
 
     private Integer level;
 
+    @JSONField(format = "yyyy-MM-dd")
     private Date publisheddate;
 
     private Integer type;
@@ -100,6 +103,23 @@ public class JsjPaper {
     }
 
     public void setSchoolyear(String schoolyear) {
+
         this.schoolyear = schoolyear == null ? null : schoolyear.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "JsjPaper{" +
+                "uuid='" + uuid + '\'' +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", particpants='" + particpants + '\'' +
+                ", level=" + level +
+                ", publisheddate=" + publisheddate +
+                ", type=" + type +
+                ", volumeperiod='" + volumeperiod + '\'' +
+                ", annex='" + annex + '\'' +
+                ", schoolyear='" + schoolyear + '\'' +
+                '}';
     }
 }

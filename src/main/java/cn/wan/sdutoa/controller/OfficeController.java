@@ -1,16 +1,20 @@
 package cn.wan.sdutoa.controller;
 
 import cn.wan.sdutoa.service.OfficeService;
+import cn.wan.sdutoa.service.PublicService;
+import cn.wan.sdutoa.util.PageUtil;
 import cn.wan.sdutoa.vo.VoQuestionPaper;
+import cn.wan.sdutoa.vo.VoTeachingPaper;
 import cn.wan.sdutoa.vo.VoTopicPaper;
 import cn.wan.sdutoa.vo.VoTrainingPaper;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by 万洪基 on 2017/2/27.
@@ -21,6 +25,36 @@ public class OfficeController {
 
     @Autowired
     OfficeService officeService;
+//    教研论文管理
+    @RequestMapping("/teachingPaper/list")
+    @ResponseBody
+    public String teachingPaperList() throws Exception{
+        return officeService.getTeachingPaperList();
+    }
+    @RequestMapping("/teachingPaper/addition")
+    @ResponseBody
+    public String teachingPaperAddition(VoTeachingPaper voTeachingPaper,@RequestParam("file") CommonsMultipartFile file, HttpServletRequest request)throws Exception{
+        return officeService.addTeachingPaper(voTeachingPaper,request,file);
+    }
+    @RequestMapping("/teachingPaper/updates/{uuid}")
+    @ResponseBody
+    public String teachingPaperUpdates(VoTeachingPaper voTeachingPaper, @RequestParam("file") CommonsMultipartFile file,@PathVariable String uuid,HttpServletRequest request)throws Exception{
+        voTeachingPaper.setUuid(uuid);
+        return officeService.updateTeachingPaperByUUID(voTeachingPaper,request,file) ;
+    }
+    @RequestMapping("/teachingPaper/deletion/{uuid}")
+    @ResponseBody
+    public String teachingPaperDeletion(@PathVariable String uuid ) throws Exception{
+        return officeService.deleteTeachingPaperByUUID(uuid);
+    }
+
+    @RequestMapping("/teachingPaper/showTePaper/{uuid}")
+    public void showTeachingPaper(@PathVariable String uuid , HttpServletResponse response) throws Exception{
+        PageUtil.showImg(officeService.getTeachingPaperByUUID(uuid).getAnnex()
+                ,response);
+    }
+
+
 //    教研课题管理
     @RequestMapping("/topicPaper/list")
     @ResponseBody

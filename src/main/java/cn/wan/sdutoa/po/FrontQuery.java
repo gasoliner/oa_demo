@@ -11,6 +11,10 @@ public class FrontQuery {
     private String [] roleDDL;
     private int syid;
     private String schoolyear;
+    private int blid;
+    private String booklevel;
+    private int stid;
+    private String searchtype;
 
     public FrontQuery() {
     }
@@ -73,6 +77,39 @@ public class FrontQuery {
     }
 
     public void setSchoolyear(String schoolyear) {
+
         this.schoolyear = schoolyear;
+    }
+
+    public int getBlid() {
+        return blid;
+    }
+
+    public void setBlid(int blid) {
+        this.blid = blid;
+    }
+
+    public String getBooklevel() {
+        return booklevel;
+    }
+
+    public void setBooklevel(String booklevel) {
+        this.booklevel = booklevel;
+    }
+
+    public int getStid() {
+        return stid;
+    }
+
+    public void setStid(int stid) {
+        this.stid = stid;
+    }
+
+    public String getSearchtype() {
+        return searchtype;
+    }
+
+    public void setSearchtype(String searchtype) {
+        this.searchtype = searchtype;
     }
 }

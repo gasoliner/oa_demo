@@ -16,4 +16,10 @@ public interface PublicService {
 
     public List<FrontQuery> getSchoolYearDDL() throws Exception;
 
+    public String getSchoolYearBySyid(String syid) throws Exception;
+
+    public List<FrontQuery> getBookLevel() throws Exception;
+
+    public List<FrontQuery> getSearchType() throws Exception;
+
 }

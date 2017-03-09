@@ -9,6 +9,14 @@
     <id column="ddlCode" javaType="int" property="syid"/>
     <result column="ddlName" javaType="String" property="schoolyear"/>
   </resultMap>
+  <resultMap id="bookLevelResultMap" type="frontQuery">
+    <id column="ddlCode" javaType="int" property="blid"/>
+    <result column="ddlName" javaType="String" property="booklevel"/>
+  </resultMap>
+  <resultMap id="searchTypeResultMap" type="frontQuery">
+    <id column="ddlCode" javaType="int" property="stid"/>
+    <result column="ddlName" javaType="String" property="searchtype"/>
+  </resultMap>
 
   <select id="getRoleDDL" resultType="role">
     SELECT rid,role FROM jsj_role
@@ -24,5 +32,22 @@
     SELECT ddlCode,ddlName
     FROM jsj_systemddl
     WHERE keyword LIKE 'schoolYear';
+  </select>
+
+  <select id="getSchoolYearBySyid" parameterType="int" resultType="String">
+    SELECT ddlName
+     FROM jsj_systemddl
+     WHERE keyword = 'schoolYear' AND ddlCode = #{syid};
+  </select>
+
+  <select id="getBookLevelDDL" resultMap="bookLevelResultMap">
+    SELECT ddlCode,ddlName
+    FROM jsj_systemddl
+    WHERE keywork LIKE 'bookLeve';
+  </select>
+  <select id="getSearchTypeDDL" resultMap="searchTypeResultMap">
+    SELECT ddlCode,ddlName
+    FROM jsj_systemddl
+        WHERE keywork LIKE 'searchType';
   </select>
 </mapper>

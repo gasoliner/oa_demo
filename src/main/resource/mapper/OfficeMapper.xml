@@ -200,4 +200,62 @@
         DELETE FROM jsj_topics
         WHERE uuid = #{uuid}
     </delete>
+    <!--教研论文管理-->
+    <select id="selectAllTeachingPaper" resultType="voTeachingPaper">
+        SELECT * FROM jsj_paper
+    </select>
+
+    <insert id="insertTeachingPaper" parameterType="voTeachingPaper">
+        INSERT INTO jsj_paper(
+        uuid,title,author,particpants,level,publisheddate,type,volumeperiod,
+        annex,schoolyear
+        )VALUES (
+        #{uuid},#{title},#{author},#{particpants},#{level},
+        #{publisheddate},#{type},#{volumeperiod},#{annex},#{schoolyear}
+        )
+    </insert>
+
+    <select id="selectTeachingPaperByUUID" parameterType="string" resultType="voTeachingPaper">
+        SELECT * FROM jsj_paper WHERE uuid = #{uuid}
+    </select>
+
+    <update id="updateTeachingPaperByUUIDSelective" parameterType="voTeachingPaper">
+        UPDATE jsj_paper
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="author != null">
+                author = #{author},
+            </if>
+            <if test="particpants != null">
+                particpants = #{particpants},
+            </if>
+            <if test="level != null">
+                level = #{level},
+            </if>
+            <if test="publisheddate != null">
+                publisheddate = #{publisheddate},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="volumeperiod != null">
+                volumeperiod = #{volumeperiod},
+            </if>
+            <if test="annex != null">
+                annex = #{annex},
+            </if>
+            <if test="schoolyear != null">
+                schoolyear = #{schoolyear},
+            </if>
+        </set>
+        WHERE uuid = #{uuid}
+    </update>
+
+    <delete id="deleteTeachingPaperByUUID" parameterType="string">
+        DELETE FROM jsj_paper
+        WHERE uuid = #{uuid}
+    </delete>
+
 </mapper>

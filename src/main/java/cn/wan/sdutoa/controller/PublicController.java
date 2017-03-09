@@ -33,4 +33,16 @@ public class PublicController {
     public String getSchoolYear() throws Exception {
         return JSON.toJSONString(publicService.getSchoolYearDDL());
     }
+
+    @RequestMapping("/blddl")
+    @ResponseBody
+    public String getBoolLevel() throws Exception{
+        return JSON.toJSONString(publicService.getBookLevel());
+    }
+
+    @RequestMapping("/stddl")
+    @ResponseBody
+    public String getSearchType() throws Exception{
+        return JSON.toJSONString(publicService.getSearchType());
+    }
 }

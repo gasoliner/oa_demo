@@ -37,6 +37,12 @@
     <!--注解扫描器，扫描controller包-->
     <context:component-scan base-package="cn.wan.sdutoa.controller;cn.wan.sdutoa.ui"/>
 
+    <!--文件上传配置-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"></property>
+        <property name="maxUploadSize" value="10485760000"></property>
+        <property name="maxInMemorySize" value="40960"></property>
+    </bean>
     <!--拦截器-->
     <!--<mvc:interceptors>-->
         <!--<mvc:interceptor>-->

@@ -1,13 +1,29 @@
 package cn.wan.sdutoa.service;
 
+import cn.wan.sdutoa.util.PageUtil;
 import cn.wan.sdutoa.vo.VoQuestionPaper;
+import cn.wan.sdutoa.vo.VoTeachingPaper;
 import cn.wan.sdutoa.vo.VoTopicPaper;
 import cn.wan.sdutoa.vo.VoTrainingPaper;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by 万洪基 on 2017/2/27.
  */
 public interface OfficeService {
+
+//    教研论文管理
+    public String getTeachingPaperList() throws Exception;
+
+    public String addTeachingPaper(VoTeachingPaper voTeachingPaper, HttpServletRequest request,CommonsMultipartFile file) throws Exception;
+
+    public String updateTeachingPaperByUUID(VoTeachingPaper voTeachingPaper,HttpServletRequest request, CommonsMultipartFile file) throws Exception;
+
+    public String deleteTeachingPaperByUUID(String uuid) throws Exception;
+
+    public VoTeachingPaper getTeachingPaperByUUID(String uuid) throws Exception;
 
 //    教研课题管理
     public String getTopicPaperList() throws Exception;
