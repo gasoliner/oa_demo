@@ -14,6 +14,9 @@
     <result column="locked" jdbcType="BIT" property="locked" />
     <result column="role" jdbcType="VARCHAR" property="role" />
   </resultMap>
+    <resultMap id="voUserResultMap" type="voUser">
+        <result column="ddlName" javaType="string" property="dep" />
+    </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -305,10 +308,10 @@
   </update>
 
   <!--自定义-->
-  <select id="selectAllUser" parameterType="cn.wan.sdutoa.po.FrontQuery" resultType="voUser">
-    SELECT jsj_user.uid,jsj_user.employeenum,jsj_user.username,jsj_user.phone,jsj_user.email,jsj_user.role,jsj_dep.dep
-    FROM jsj_user,jsj_dep
-    WHERE jsj_user.deptid=jsj_dep.deptid
+  <select id="selectAllUser" parameterType="cn.wan.sdutoa.po.FrontQuery" resultMap="voUserResultMap">
+    SELECT jsj_user.uid,jsj_user.employeenum,jsj_user.username,jsj_user.phone,jsj_user.email,jsj_user.role,jsj_systemddl.ddlName
+    FROM jsj_user,jsj_systemddl
+    WHERE jsj_user.deptid = jsj_systemddl.ddlCode AND jsj_systemddl.keyword = 'dept'
     LIMIT #{start},#{pageSize}
   </select>
 

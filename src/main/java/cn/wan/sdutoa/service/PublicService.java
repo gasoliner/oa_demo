@@ -3,6 +3,8 @@ package cn.wan.sdutoa.service;
 import cn.wan.sdutoa.po.Dependent;
 import cn.wan.sdutoa.po.FrontQuery;
 import cn.wan.sdutoa.po.Role;
+import cn.wan.sdutoa.vo.VoSystemDDL;
+
 import java.util.List;
 
 /**
@@ -21,5 +23,7 @@ public interface PublicService {
     public List<FrontQuery> getBookLevel() throws Exception;
 
     public List<FrontQuery> getSearchType() throws Exception;
+
+    public List<VoSystemDDL> getDDLKeywordALL() throws Exception;
 
 }

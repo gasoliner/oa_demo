@@ -45,4 +45,10 @@ public class PublicController {
     public String getSearchType() throws Exception{
         return JSON.toJSONString(publicService.getSearchType());
     }
+
+    @RequestMapping("/kwddl")
+    @ResponseBody
+    public String getKeyword() throws Exception{
+        return JSON.toJSONString(publicService.getDDLKeywordALL());
+    }
 }

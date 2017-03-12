@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wan.sdutoa.mapper.SystemMapper">
+    <insert id="insertSystemDDL" parameterType="voSystemDDL">
+        INSERT INTO jsj_systemddl(
+        uuid,keyword,ddlcode,ddlname
+        )VALUES (
+        #{uuid},#{keyword},#{ddlcode},#{ddlname}
+        )
+    </insert>
+    <update id="updateSystemDDLByUUIDSelective" parameterType="voSystemDDL">
+        UPDATE jsj_systemddl
+        <set>
+            <if test="keyword != null">
+                keyword = #{keyword},
+            </if>
+            <if test="ddlcode != null">
+                ddlcode = #{ddlcode},
+            </if>
+            <if test="ddlname != null">
+                ddlname = #{ddlname},
+            </if>
+        </set>
+        WHERE uuid = #{uuid}
+    </update>
+    <delete id="deleteSystemDDLByUUID" parameterType="string">
+        DELETE FROM jsj_systemddl
+        WHERE uuid = #{uuid}
+    </delete>
+</mapper>

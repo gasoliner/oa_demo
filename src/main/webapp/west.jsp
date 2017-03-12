@@ -14,40 +14,36 @@
 <body>
 <div class="easyui-accordion" style="width:auto;height: 350px;border: 0px;">
     <div title="系统管理" iconCls="icon-cog" style="overflow: auto;padding: 10px;">
-        <div class="easyui-accordion" style="width: auto;height: auto">
-            <div title="流程管理" iconCls="icon-cog" style="overflow: auto;padding: 10px;">
+    <%--<div title="系统管理" iconCls="icon-cog" style="overflow: auto;padding: 10px;">--%>
+        <%--<div class="easyui-accordion" style="width: auto;height: auto">--%>
+            <%--<div title="流程管理" iconCls="icon-cog" style="overflow: auto;padding: 10px;">--%>
                 <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('流程列表','')">流程列表</a><br/>
+                    <a href="#" class="easyui-linkbutton" onclick="addTab('流程管理','')">流程管理</a><br/>
                 </div>
+                <%--<div class="menu-last">--%>
+                    <%--<a href="#" class="easyui-linkbutton" onclick="addTab('流程部署','')">流程部署</a>--%>
+                <%--</div>--%>
+            <%--</div>--%>
                 <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('流程部署','')">流程部署</a>
+                    <a href="#" class="easyui-linkbutton" onclick="addTab('字典管理','system/dictionaryManage')">字典管理</a><br/>
                 </div>
-            </div>
-            <div title="字典管理" iconCls="icon-cog" style="overflow: auto;padding: 10px;">
+            <%--<div title="角色管理" iconCls="icon-cog" style="overflow: auto;padding: 10px;">--%>
                 <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('字典列表','')">字典列表</a><br/>
+                    <a href="#" class="easyui-linkbutton" onclick="addTab('角色管理','')">角色管理</a><br/>
                 </div>
+                <%--<div class="menu-last">--%>
+                    <%--<a href="#" class="easyui-linkbutton" onclick="addTab('角色添加','')">角色添加</a>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div title="通知管理" iconCls="icon-cog" style="overflow: auto;padding: 10px;">--%>
                 <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('字典添加','')">字典添加</a>
+                    <a href="#" class="easyui-linkbutton" onclick="addTab('通知管理','')">通知管理</a><br/>
                 </div>
-            </div>
-            <div title="角色管理" iconCls="icon-cog" style="overflow: auto;padding: 10px;">
-                <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('角色列表','')">角色列表</a><br/>
-                </div>
-                <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('角色添加','')">角色添加</a>
-                </div>
-            </div>
-            <div title="通知管理" iconCls="icon-cog" style="overflow: auto;padding: 10px;">
-                <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('通知列表','')">通知列表</a><br/>
-                </div>
-                <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('添加通知','')">添加通知</a>
-                </div>
-            </div>
-        </div>
+                <%--<div class="menu-last">--%>
+                    <%--<a href="#" class="easyui-linkbutton" onclick="addTab('添加通知','')">添加通知</a>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
     </div>
     <div title="个人办公" iconCls="icon-computer" style="overflow:auto;padding:10px;">
         <div class="easyui-accordion" style="width: auto;height: auto">
@@ -74,15 +70,15 @@
                 </div>
             </div>
             <div title="获奖详情管理" iconCls="icon-computer" style="overflow: auto;padding: 10px;">
+                <%--<div class="menu-last">--%>
+                    <%--<a href="#" class="easyui-linkbutton" onclick="addTab('获奖申请','awardDetail/addition')">填写获奖申请</a>--%>
+                <%--</div>--%>
                 <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('获奖申请','award/add.jsp')">填写获奖申请</a>
+                    <a href="#" class="easyui-linkbutton" onclick="addTab('获奖情况查看','awardDetail/awardDetailManage')">获奖情况管理</a>
                 </div>
-                <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('获奖情况查看','')">获奖情况查看</a>
-                </div>
-                <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('获奖情况列表','award/list.jsp')">获奖情况列表</a>
-                </div>
+                <%--<div class="menu-last">--%>
+                    <%--<a href="#" class="easyui-linkbutton" onclick="addTab('获奖情况列表','awardDetail/listAll')">获奖情况列表</a>--%>
+                <%--</div>--%>
             </div>
         </div>
     </div>

@@ -196,3 +196,57 @@ function showTePaper(u) {
     });
     $("#imgTePaper").attr("src","/office/teachingPaper/showTePaper/"+u);
 }
+//设置下拉列表框
+$(function () {
+    $('#searchInput').combobox({
+        onChange: function(){
+            $("#dg").datagrid({
+                url:'/system/dictionary/list/'+$("#searchInput").combobox("getValue")
+            });
+            $("#dg").datagrid("load");
+        }
+    });
+});
+//设置下拉列表框end
+function newSystemDDL(){
+    $("#fm").form("clear");
+    $("#sysDDLDialog").dialog("open").dialog("setTitle","字典管理--新建");
+    url = "/system/dictionary/addition";
+}
+function editSystemDDL(){
+    var row = $("#dg").datagrid("getSelected");
+    if (row){
+        $("#sysDDLDialog").dialog("open").dialog("setTitle","字典管理--编辑");
+        $("#fm").form("clear");
+        $("#fm").form("load",row);
+        url = "/system/dictionary/updates/"+row.uuid;
+    }
+}
+function destroySystemDDL(){
+    var row = $("#dg").datagrid("getSelected");
+    if (row){
+        $.messager.confirm("Confirm","确定要删除这条记录吗",function (r) {
+            if (r){
+                $("#dfm").form("submit",{
+                    url:"/system/dictionary/deletion/"+row.uuid,
+                    success: function (res) {
+                        alert(res);
+                        $("#sysDDLDialog").dialog("close");
+                        $("#dg").datagrid("reload")
+                    }
+                })
+            }
+        })
+    }
+}
+function saveSysDDL(){
+    $("#fm").form("submit",{
+        url:url,
+        success: function (res) {
+            alert(res);
+            $("#sysDDLDialog").dialog("close");
+            $("#dg").datagrid("reload");
+        }
+    })
+}
+

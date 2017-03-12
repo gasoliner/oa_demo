@@ -5,6 +5,7 @@ import cn.wan.sdutoa.po.Dependent;
 import cn.wan.sdutoa.po.FrontQuery;
 import cn.wan.sdutoa.po.Role;
 import cn.wan.sdutoa.service.PublicService;
+import cn.wan.sdutoa.vo.VoSystemDDL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,13 +35,15 @@ public class PublicServiceImpl implements PublicService {
         return publicMapper.getSchoolYearBySyid(Integer.parseInt(syid));
     }
 
-    @Override
     public List<FrontQuery> getBookLevel() throws Exception {
         return publicMapper.getBookLevelDDL();
     }
 
-    @Override
     public List<FrontQuery> getSearchType() throws Exception {
         return publicMapper.getSearchTypeDDL();
+    }
+
+    public List<VoSystemDDL> getDDLKeywordALL() throws Exception {
+        return publicMapper.getDDLKeywordALL();
     }
 }

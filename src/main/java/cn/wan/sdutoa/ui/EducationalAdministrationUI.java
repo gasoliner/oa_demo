@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/educationalAdministration")
-public class educationalAdministrationUI {
+public class EducationalAdministrationUI {
 
     @RequestMapping("/testPaperManage")
     public String testPaperManage(){

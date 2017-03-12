@@ -25,29 +25,42 @@
   <select id="getDependentDDL" resultMap="dependentResultMap">
     SELECT ddlCode,ddlName
     FROM jsj_systemddl
-    WHERE keyword LIKE 'dept';
+    WHERE keyword LIKE 'dept'
   </select>
 
   <select id="getSchoolYearDDL" resultMap="schoolYearResultMap">
     SELECT ddlCode,ddlName
     FROM jsj_systemddl
-    WHERE keyword LIKE 'schoolYear';
+    WHERE keyword LIKE 'schoolYear'
   </select>
 
   <select id="getSchoolYearBySyid" parameterType="int" resultType="String">
     SELECT ddlName
      FROM jsj_systemddl
-     WHERE keyword = 'schoolYear' AND ddlCode = #{syid};
+     WHERE keyword = 'schoolYear' AND ddlCode = #{syid}
   </select>
 
   <select id="getBookLevelDDL" resultMap="bookLevelResultMap">
     SELECT ddlCode,ddlName
     FROM jsj_systemddl
-    WHERE keywork LIKE 'bookLeve';
+    WHERE keywork LIKE 'bookLeve'
   </select>
   <select id="getSearchTypeDDL" resultMap="searchTypeResultMap">
     SELECT ddlCode,ddlName
     FROM jsj_systemddl
-        WHERE keywork LIKE 'searchType';
+        WHERE keywork LIKE 'searchType'
+  </select>
+  <select id="getSystemDDLAll" resultType="voSystemDDL">
+    SELECT * FROM jsj_systemddl
+  </select>
+  <select id="getDDLKeywordALL" resultType="voSystemDDL">
+    SELECT keyword
+    FROM jsj_systemddl
+    GROUP BY keyword
+  </select>
+  <select id="getSystemDDLByKeyword" parameterType="string" resultType="voSystemDDL">
+    SELECT *
+    FROM jsj_systemddl
+    WHERE keyword = #{keyword}
   </select>
 </mapper>
