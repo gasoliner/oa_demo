@@ -48,4 +48,8 @@ public class PageUtil {
         return file.delete();
     }
 
+    public static String setVoNoticeActionByUUID(String uuid){
+        return  "<a href = \"#\" onclick=\"showNotice('"+uuid+"')\">查看</a>";
+    }
+
 }

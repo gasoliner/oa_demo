@@ -1,5 +1,6 @@
 package cn.wan.sdutoa.service;
 
+import cn.wan.sdutoa.vo.VoNotice;
 import cn.wan.sdutoa.vo.VoSystemDDL;
 
 /**
@@ -16,4 +17,12 @@ public interface SystemService {
     public String updateDictionaryByUUID(String uuid,VoSystemDDL voSystemDDL) throws Exception;
 
     public String deleteDictionaryByUUID(String uuid) throws Exception;
+
+    public String noticeListAll() throws Exception;
+
+    public String addNotice(VoNotice voNotice) throws Exception;
+
+    public String deleteNoticeByUUID(String uuid) throws Exception;
+
+    public String noticeByUUID(String uuid) throws Exception;
 }

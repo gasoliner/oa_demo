@@ -29,7 +29,7 @@
                 </div>
             <%--<div title="角色管理" iconCls="icon-cog" style="overflow: auto;padding: 10px;">--%>
                 <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('角色管理','')">角色管理</a><br/>
+                    <a href="#" class="easyui-linkbutton" onclick="addTab('角色管理','system/roleManage')">角色管理</a><br/>
                 </div>
                 <%--<div class="menu-last">--%>
                     <%--<a href="#" class="easyui-linkbutton" onclick="addTab('角色添加','')">角色添加</a>--%>
@@ -37,7 +37,7 @@
             <%--</div>--%>
             <%--<div title="通知管理" iconCls="icon-cog" style="overflow: auto;padding: 10px;">--%>
                 <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('通知管理','')">通知管理</a><br/>
+                    <a href="#" class="easyui-linkbutton" onclick="addTab('通知管理','system/noticeManage')">通知管理</a><br/>
                 </div>
                 <%--<div class="menu-last">--%>
                     <%--<a href="#" class="easyui-linkbutton" onclick="addTab('添加通知','')">添加通知</a>--%>

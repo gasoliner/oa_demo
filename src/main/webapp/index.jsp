@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="ui/demo/demo.css">
     <script type="text/javascript" src="ui/jquery.min.js"></script>
     <script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="ui/sdutoa.js"></script>
     <script type="text/javascript">
         function addTab(title, url){
             if ($('#tt').tabs('exists', title)){
@@ -38,9 +39,26 @@
                 <div style="height: auto;margin-top: 60px;margin-left: 60px;" align="left">
                     <iframe allowtransparency="true" frameborder="0" width="565" height="98" scrolling="no" src="//tianqi.2345.com/plugin/widget/index.htm?s=2&z=3&t=1&v=0&d=3&bd=0&k=000000&f=008080&q=1&e=1&a=1&c=54830&w=565&h=98&align=center"></iframe>
                 </div>
-                <div style="height: auto;margin-right: 20px;" align="right">
-                    <div class="easyui-calendar" style="width:250px;height:250px;"></div>
+                <div style="width: 600px">
+                    <table id="dg" title="通知列表" class="easyui-datagrid" style="width: 100%;height:auto"
+                           fitColumns="true" singleSelect="true" pagination="true"
+                           data-options="rownumbers:true,
+                            url:'/system/notice/list',
+                            method:'get',
+                            pageSize:15,
+                            pageList:[5,10,15,20,25]">
+                        <thead>
+                        <tr>
+                            <th field="title" width="120">标题</th>
+                            <th field="begindate" width="25">发布时间</th>
+                            <th field="action" width="25">操作</th>
+                        </tr>
+                        </thead>
+                    </table>
                 </div>
+                <span style="height: auto;margin-right: 20px;">
+                    <div class="easyui-calendar" style="width:250px;height:250px;"></div>
+                </span>
             </div>
         </div>
     </div>
@@ -48,6 +66,8 @@
         <jsp:include page="south.jsp"/>
     </div>
 </div>
-
+<div id="noticeDialog" class="easyui-dialog" style="width:500px;height:550px;padding:10px 20px"
+     closed="true">
+</div>
 </body>
 </html>

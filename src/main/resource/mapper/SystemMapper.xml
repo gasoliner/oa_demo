@@ -27,4 +27,23 @@
         DELETE FROM jsj_systemddl
         WHERE uuid = #{uuid}
     </delete>
+
+    <select id="getNoticeList" resultType="voNotice">
+        SELECT * FROM jsj_notice
+    </select>
+    <insert id="insertNotice" parameterType="voNotice">
+        INSERT INTO jsj_notice(
+        uuid,title,content,user,begindate
+        )VALUES (
+        #{uuid},#{title},#{content},#{user},#{begindate}
+        )
+    </insert>
+    <delete id="deleteNoticeByUUID" parameterType="string">
+        DELETE FROM jsj_notice
+        WHERE uuid = #{uuid}
+    </delete>
+    <select id="getNoticeByUUID" parameterType="string" resultType="string">
+        SELECT content FROM jsj_notice
+        WHERE uuid = #{uuid}
+    </select>
 </mapper>

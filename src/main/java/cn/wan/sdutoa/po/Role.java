@@ -1,17 +1,21 @@
 package cn.wan.sdutoa.po;
 
-/**
- * Created by wanzhenghang on 2017/2/17.
- */
 public class Role {
-    private long rid;
+    private Long rid;
+
     private String role;
 
-    public long getRid() {
+    private String ddlid;
+
+    private String resourceIds;
+
+    private Boolean available;
+
+    public Long getRid() {
         return rid;
     }
 
-    public void setRid(long rid) {
+    public void setRid(Long rid) {
         this.rid = rid;
     }
 
@@ -20,7 +24,31 @@ public class Role {
     }
 
     public void setRole(String role) {
-        this.role = role;
+        this.role = role == null ? null : role.trim();
+    }
+
+    public String getDdlid() {
+        return ddlid;
+    }
+
+    public void setDdlid(String ddlid) {
+        this.ddlid = ddlid == null ? null : ddlid.trim();
+    }
+
+    public String getResourceIds() {
+        return resourceIds;
+    }
+
+    public void setResourceIds(String resourceIds) {
+        this.resourceIds = resourceIds == null ? null : resourceIds.trim();
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     @Override
@@ -28,6 +56,9 @@ public class Role {
         return "Role{" +
                 "rid=" + rid +
                 ", role='" + role + '\'' +
+                ", ddlid='" + ddlid + '\'' +
+                ", resourceIds='" + resourceIds + '\'' +
+                ", available=" + available +
                 '}';
     }
 }

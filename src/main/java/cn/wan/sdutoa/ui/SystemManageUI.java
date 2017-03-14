@@ -15,4 +15,14 @@ public class SystemManageUI {
         return "systemManage/dictionaryManage";
     }
 
+    @RequestMapping("/roleManage")
+    public String roleManage(){
+        return "systemManage/roleManage";
+    }
+
+    @RequestMapping("/noticeManage")
+    public String noticeManage(){
+        return "systemManage/noticeManage";
+    }
+
 }

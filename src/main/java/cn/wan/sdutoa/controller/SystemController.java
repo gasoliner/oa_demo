@@ -1,6 +1,7 @@
 package cn.wan.sdutoa.controller;
 
 import cn.wan.sdutoa.service.SystemService;
+import cn.wan.sdutoa.vo.VoNotice;
 import cn.wan.sdutoa.vo.VoSystemDDL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,5 +41,30 @@ public class SystemController {
     @ResponseBody
     public String dictionaryDeletion(@PathVariable String uuid) throws Exception {
         return systemService.deleteDictionaryByUUID(uuid);
+    }
+
+    @RequestMapping("/notice/list")
+    @ResponseBody
+    public String noticeList() throws Exception {
+        return systemService.noticeListAll();
+    }
+
+    @RequestMapping("/notice/addition")
+    @ResponseBody
+    public String noticeAddition(VoNotice voNotice) throws Exception {
+        return systemService.addNotice(voNotice);
+    }
+
+    @RequestMapping(value = "/notice/deletion/{uuid}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public String noticeDeletion(@PathVariable String uuid) throws Exception {
+        return systemService.deleteNoticeByUUID(uuid);
+    }
+
+    @RequestMapping("/notice/{uuid}")
+    @ResponseBody
+    public String noticeByUUID(@PathVariable String uuid) throws Exception {
+        System.out.println("controller:\t"+uuid);
+        return systemService.noticeByUUID(uuid);
     }
 }

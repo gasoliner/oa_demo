@@ -250,3 +250,49 @@ function saveSysDDL(){
     })
 }
 
+function newNotice() {
+    $("#fm").form("clear");
+    $("#noticeDialog").dialog("open").dialog("setTitle", "通知管理--新建");
+    url = "/system/notice/addition";
+}
+function destroyNotice(){
+    var row = $("#dg").datagrid("getSelected");
+    if (row){
+        $.messager.confirm("Confirm","确定要删除这条记录吗",function (r) {
+            if (r){
+                $("#dfm").form("submit",{
+                    url:"/system/notice/deletion/"+row.uuid,
+                    success: function (res) {
+                        alert(res);
+                        $("#noticeDialog").dialog("close");
+                        $("#dg").datagrid("reload")
+                    }
+                })
+            }
+        })
+    }
+}
+function saveNotice(){
+    $("#fm").form("submit",{
+        url:url,
+        success: function (res) {
+            alert(res);
+            $("#noticeDialog").dialog("close");
+            $("#dg").datagrid("reload");
+        }
+    })
+}
+function showNotice(u) {
+    $.get("/system/notice/"+u,null,function (res) {
+        $("#noticeDialog").dialog({
+            title: "查看",
+            width: 550,
+            height: 550,
+            closed: false,
+            cache: false,
+            modal: true,
+            content:res
+        });
+    });
+
+}
