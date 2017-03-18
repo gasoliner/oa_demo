@@ -4,6 +4,11 @@ import cn.wan.sdutoa.po.DataGrid;
 import cn.wan.sdutoa.service.UserService;
 import cn.wan.sdutoa.vo.VoUser;
 import com.alibaba.fastjson.JSON;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +25,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @RequiresRoles("1")
     @RequestMapping(value = "/list")
     @ResponseBody
     public String userList(int page,int rows) throws Exception {
@@ -29,6 +35,7 @@ public class UserController {
         return JSON.toJSONString(dataGrid);
     }
 
+    @RequiresRoles("1")
     @RequestMapping(value = "/addition")
     @ResponseBody
     public String userAdd(VoUser voUser)throws Exception{
@@ -40,5 +47,19 @@ public class UserController {
     @ResponseBody
     public String personalInfoUpdate(VoUser voUser) throws Exception {
         return userService.userUpdate(voUser);
+    }
+
+    @RequestMapping(value = "/signin")
+    public String signIn(VoUser voUser){
+        Subject currentUser = SecurityUtils.getSubject();
+        try {
+            String employeenum = voUser.getEmployeenum();
+            String password = voUser.getPassword();
+            UsernamePasswordToken token = new UsernamePasswordToken(employeenum,password);
+            currentUser.login(token);//当前用户拿着这个token登录
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return "redirect:index.jsp";
     }
 }

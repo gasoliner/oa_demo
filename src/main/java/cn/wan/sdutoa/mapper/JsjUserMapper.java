@@ -7,6 +7,7 @@ import cn.wan.sdutoa.vo.VoUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Set;
 
 public interface JsjUserMapper {
     long countByExample(JsjUserExample example);
@@ -35,4 +36,10 @@ public interface JsjUserMapper {
     List<VoUser> selectAllUser (FrontQuery frontQuery);
 
     long countAllUser();
+
+    VoUser getUserByEmployee(String employee);
+
+    String getRolesByEmployee(String employee);
+
+    String getPermissionByEmployee(String employee);
 }

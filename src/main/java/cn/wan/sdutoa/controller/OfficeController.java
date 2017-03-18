@@ -124,7 +124,4 @@ public class OfficeController {
     public String testPaperDeletion(@PathVariable("qid")int qid) throws Exception {
         return officeService.deleteTestPaperById(qid);
     }
-
-
-
 }

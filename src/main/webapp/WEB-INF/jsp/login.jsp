@@ -27,21 +27,13 @@
         <form id="fm" method="post">
             <div class="fitem">
                 <label>账号&nbsp;&nbsp;&nbsp;</label>
-                <input class="easyui-textbox" name="username" style="width: 100%;height: 32px"/>
+                <input class="easyui-textbox" name="employeenum" style="width: 100%;height: 32px"/>
             </div><br/>
             <div class="fitem">
                 <label>密码&nbsp;&nbsp;&nbsp;</label>
                 <input class="easyui-textbox" name="password" style="width: 100%;height: 32px" type="password"/>
             </div>
         </form>
-        <%--<div style="width: 25%;margin: 20px auto">--%>
-            <%--<div>账号：</div>--%>
-            <%--<input class="easyui-textbox" style="width: 100%;height: 32px"/>--%>
-        <%--</div>--%>
-        <%--<div style="width: 25%;margin: 20px auto">--%>
-            <%--<div>密码：</div>--%>
-            <%--<input class="easyui-textbox" style="width: 100%;height: 32px" type="password"/>--%>
-        <%--</div>--%>
         <div style="margin: 20px"></div>
         <div style="width: 25%;margin: 20px auto;">
             <a class="easyui-linkbutton" iconCls="icon-ok" style="width: 100%;height: 32px;" onclick="login()">登录</a>

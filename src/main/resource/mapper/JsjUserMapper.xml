@@ -318,4 +318,25 @@
   <select id="countAllUser" resultType="long">
     SELECT COUNT(*) FROM jsj_user
   </select>
+
+  <select id="getUserByEmployee" parameterType="string" resultType="voUser">
+    SELECT * FROM jsj_user
+    WHERE employeenum = #{employee}
+  </select>
+
+  <select id="getRolesByEmployee" parameterType="string" resultType="string">
+    SELECT jsj_user.roleIdsStr
+    FROM jsj_user
+    WHERE jsj_user.employeenum = #{employee}
+  </select>
+
+  <select id="getPermissionByEmployee" parameterType="string" resultType="string">
+    SELECT jsj_role.resource_ids
+    FROM jsj_role
+    WHERE jsj_role.role LIKE (
+      SELECT jsj_user.role
+      FROM jsj_user
+      WHERE jsj_user.employeenum = #{employee}
+      )
+  </select>
 </mapper>

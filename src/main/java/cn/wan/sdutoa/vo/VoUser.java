@@ -16,4 +16,8 @@ public class VoUser extends JsjUser {
         this.dep = dep;
     }
 
+    @Override
+    public String getSalt() {
+        return super.getEmployeenum()+super.getSalt();
+    }
 }

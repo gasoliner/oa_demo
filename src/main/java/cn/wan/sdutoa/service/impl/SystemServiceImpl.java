@@ -103,7 +103,6 @@ public class SystemServiceImpl implements SystemService {
     }
 
     public String noticeByUUID(String uuid) throws Exception {
-        System.out.println("service:\t"+systemMapper.getNoticeByUUID(uuid));
         return JSON.toJSONString(systemMapper.getNoticeByUUID(uuid));
     }
 
