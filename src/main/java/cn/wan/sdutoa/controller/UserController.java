@@ -11,6 +11,7 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,6 +42,21 @@ public class UserController {
     public String userAdd(VoUser voUser)throws Exception{
         System.out.println(voUser);
         return userService.userAdd(voUser);
+    }
+
+    @RequiresRoles("1")
+    @RequestMapping(value = "/updates/{uid}")
+    @ResponseBody
+    public String userUpdate(VoUser voUser,@PathVariable Long uid)throws Exception{
+        voUser.setUid(uid);
+        return userService.userUpdate(voUser);
+    }
+
+    @RequiresRoles("1")
+    @RequestMapping(value = "/deletion/{uid}")
+    @ResponseBody
+    public String userDelete(@PathVariable Long uid)throws Exception{
+        return userService.userDelete(uid);
     }
 
     @RequestMapping(value = "/personalInfo")

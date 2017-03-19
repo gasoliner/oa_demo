@@ -2,10 +2,16 @@ package cn.wan.sdutoa.controller;
 
 import cn.wan.sdutoa.service.PublicService;
 import com.alibaba.fastjson.JSON;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by wanzhenghang on 2017/2/17.
@@ -15,6 +21,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PublicController {
     @Autowired
     PublicService publicService;
+
+//    @ExceptionHandler({UnauthorizedException.class})
+//    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+//    public ModelAndView processUnauthenticatedException(NativeWebRequest request, UnauthorizedException e) {
+//        ModelAndView mv = new ModelAndView();
+//        mv.addObject("exception", e);
+//        mv.setViewName("unauthorized");
+//        return mv;
+//    }
 
     @RequestMapping("/rddl")
     @ResponseBody

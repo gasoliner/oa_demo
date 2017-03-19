@@ -1,5 +1,6 @@
 package cn.wan.sdutoa.controller;
 
+import cn.wan.sdutoa.service.PublicService;
 import cn.wan.sdutoa.service.UserService;
 import cn.wan.sdutoa.util.ContantKey;
 import cn.wan.sdutoa.vo.VoUser;
@@ -22,6 +23,8 @@ import javax.servlet.http.HttpSession;
 public class Login {
     @Autowired
     UserService userService;
+    @Autowired
+    PublicService publicService;
 
     @RequestMapping("/login")
     @ResponseBody
@@ -33,6 +36,7 @@ public class Login {
             System.out.println("登录成功");
             voUser = userService.getUserByEmployee(voUser.getEmployeenum());
             session.setAttribute(ContantKey.GLOBLE_USER_INFO,voUser);
+            session =loadAllCurrencyResource(session);
             return "/index";
         }catch (UnknownAccountException uae){
             System.out.println("用户名错误");
@@ -48,5 +52,20 @@ public class Login {
 //        session.removeAttribute(ContantKey.GLOBLE_USER_INFO);
         session.invalidate();
         return;
+    }
+
+    public HttpSession loadAllCurrencyResource(HttpSession session) {
+        try {
+            session.setAttribute("roles",publicService.getRoleDDL());
+            session.setAttribute("depts",publicService.getDependentDDL());
+            session.setAttribute("schoolyears",publicService.getSchoolYearDDL());
+            session.setAttribute("booklevels",publicService.getBookLevel());
+            session.setAttribute("searchtypes",publicService.getSearchType());
+            session.setAttribute("keywords",publicService.getDDLKeywordALL());
+            return session;
+        }catch (Exception e){
+            e.printStackTrace();
+            return session;
+        }
     }
 }

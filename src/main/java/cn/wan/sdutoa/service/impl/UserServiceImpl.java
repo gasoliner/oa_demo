@@ -4,6 +4,7 @@ import cn.wan.sdutoa.mapper.JsjUserMapper;
 import cn.wan.sdutoa.po.FrontQuery;
 import cn.wan.sdutoa.po.JsjUser;
 import cn.wan.sdutoa.service.UserService;
+import cn.wan.sdutoa.util.PageUtil;
 import cn.wan.sdutoa.vo.VoUser;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,7 @@ public class UserServiceImpl implements UserService {
     public String userAdd(VoUser voUser) {
         voUser.setLocked(false);
         voUser.setPassword("000000");
-        if (voUser.getRoleidsstr().equals("1")){
-            voUser.setRole("管理员");
-        }else {
-            voUser.setRole("教师");
-        }
+        voUser.setRole(PageUtil.setRoleByRid(voUser.getRoleidsstr()));
         voUser.setSalt("default salt");
         try {
             jsjUserMapper.insert(voUser);
@@ -47,11 +44,21 @@ public class UserServiceImpl implements UserService {
     }
 
     public String userUpdate(VoUser voUser) throws Exception {
+        voUser.setRole(PageUtil.setRoleByRid(voUser.getRoleidsstr()));
         try {
             jsjUserMapper.updateByPrimaryKeySelective(voUser);
             return JSON.toJSONString("更新成功！");
         }catch (Exception e){
             return JSON.toJSONString("更新时出现错误，请稍后再试");
+        }
+    }
+
+    public String userDelete(Long uid) throws Exception {
+        try {
+            jsjUserMapper.deleteByPrimaryKey(uid);
+            return JSON.toJSONString("删除成功");
+        }catch (Exception e){
+            return JSON.toJSONString("删除失败，请稍后再试");
         }
     }
 

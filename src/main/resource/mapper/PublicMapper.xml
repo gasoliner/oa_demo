@@ -43,12 +43,12 @@
   <select id="getBookLevelDDL" resultMap="bookLevelResultMap">
     SELECT ddlCode,ddlName
     FROM jsj_systemddl
-    WHERE keywork LIKE 'bookLeve'
+    WHERE keyword LIKE 'bookLeve'
   </select>
   <select id="getSearchTypeDDL" resultMap="searchTypeResultMap">
     SELECT ddlCode,ddlName
     FROM jsj_systemddl
-        WHERE keywork LIKE 'searchType'
+        WHERE keyword LIKE 'searchType'
   </select>
   <select id="getSystemDDLAll" resultType="voSystemDDL">
     SELECT * FROM jsj_systemddl

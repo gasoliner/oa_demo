@@ -86,6 +86,7 @@
             </div>
         </div>
     </div>
+    <shiro:hasRole name="1">
     <div title="人员管理" iconCls="icon-man" style="overflow: auto;padding: 10px;">
         <div class="menu-last">
             <a href="#" class="easyui-linkbutton" onclick="addTab('用户列表','userManageUI/userList')">用户列表</a>
@@ -94,7 +95,7 @@
             <a href="#" class="easyui-linkbutton" onclick="addTab('用户添加','userManageUI/userAdd')">用户添加</a>
         </div>
     </div>
-    <shiro:hasRole name="1">
+    </shiro:hasRole>
     <div title="个人信息管理" iconCls="icon-mini-edit" selected="true" style="padding:10px;">
         <div class="menu-last">
             <a href="#" class="easyui-linkbutton" onclick="addTab('个人信息','personalManageUI/personalInfo')">个人信息</a>
@@ -103,6 +104,5 @@
             <a href="#" class="easyui-linkbutton" onclick="addTab('密码修改','')">密码修改</a>
         </div>
     </div>
-    </shiro:hasRole>
 </div>
 </body>

@@ -18,6 +18,8 @@ public interface UserService {
 
     public String userUpdate (VoUser voUser) throws Exception;
 
+    public String userDelete (Long uid) throws Exception;
+
     public VoUser getUserByEmployee(String em);
 
     public Set<String> getRolesByEmployee(String em);

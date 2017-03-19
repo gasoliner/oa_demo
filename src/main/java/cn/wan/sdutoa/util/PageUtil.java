@@ -52,4 +52,12 @@ public class PageUtil {
         return  "<a href = \"#\" onclick=\"showNotice('"+uuid+"')\">查看</a>";
     }
 
+    public static String setRoleByRid(String rid){
+        if (rid.equals("1")){
+            return "管理员";
+        }else {
+            return "教师";
+        }
+    }
+
 }

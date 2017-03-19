@@ -308,3 +308,43 @@ function logout() {
         window.location.href = "/login_UI";
     })
 }
+function newUser() {
+    $("#fm").form("clear");
+    $("#userDialog").dialog("open").dialog("setTitle","用户--新建");
+    url = "/user/addition";
+}
+function editUser() {
+    var row = $("#dg").datagrid("getSelected");
+    if (row){
+        $("#userDialog").dialog("open").dialog("setTitle","用户--编辑");
+        $("#fm").form("load",row);
+        url = "/user/updates/"+row.uid;
+    }
+}
+function destroyUser() {
+    var row = $("#dg").datagrid("getSelected");
+    if (row){
+        $.messager.confirm("Confirm","确定要删除这条记录吗",function (r) {
+            if (r){
+                $("#dfm").form("submit",{
+                    url:"/user/deletion/"+row.uid,
+                    success: function (res) {
+                        alert(res);
+                        $("#userDialog").dialog("close");
+                        $("#dg").datagrid("reload")
+                    }
+                })
+            }
+        })
+    }
+}
+function saveUser() {
+    $("#fm").form("submit",{
+        url:url,
+        success: function (res) {
+            alert(res);
+            $("#userDialog").dialog("close");
+            $('#dg').datagrid("reload");
+        }
+    })
+}
