@@ -18,7 +18,7 @@
         <%--<div class="easyui-accordion" style="width: auto;height: auto">--%>
             <%--<div title="流程管理" iconCls="icon-cog" style="overflow: auto;padding: 10px;">--%>
                 <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('流程管理','')">流程管理</a><br/>
+                    <a href="#" class="easyui-linkbutton" onclick="addTab('流程管理','system/processManage')">流程管理</a><br/>
                 </div>
                 <%--<div class="menu-last">--%>
                     <%--<a href="#" class="easyui-linkbutton" onclick="addTab('流程部署','')">流程部署</a>--%>

@@ -1,7 +1,6 @@
 package cn.wan.sdutoa.util;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOExceptionWithCause;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +42,19 @@ public class PageUtil {
         outputStream.close();
     }
 
+    public static void showImg(InputStream inputStream, HttpServletResponse response) throws IOException {
+        response.setContentType("image/*");
+        OutputStream outputStream = response.getOutputStream();
+        int len ;
+        byte[] bytes = new byte[1024*8];
+        while ((len = inputStream.read(bytes))!=-1){
+            outputStream.write(bytes,0,len);
+            outputStream.flush();
+        }
+        inputStream.close();
+        outputStream.close();
+    }
+
     public static boolean deleteFile(String filePath) throws IOException{
         File file = new File(filePath);
         return file.delete();
@@ -60,4 +72,7 @@ public class PageUtil {
         }
     }
 
+    public static String setVoProcessAction(String deploymentId,String resourceName){
+        return  "<a href = \"#\" onclick=\"showProPng('"+deploymentId+"','"+resourceName+"')\">查看</a>";
+    }
 }

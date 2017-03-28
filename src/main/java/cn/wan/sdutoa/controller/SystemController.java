@@ -1,15 +1,20 @@
 package cn.wan.sdutoa.controller;
 
+import cn.wan.sdutoa.service.ActivityService;
 import cn.wan.sdutoa.service.SystemService;
+import cn.wan.sdutoa.util.PageUtil;
 import cn.wan.sdutoa.vo.VoNotice;
 import cn.wan.sdutoa.vo.VoSystemDDL;
+import cn.wan.sdutoa.vo.VoTeachingPaper;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
 
 /**
  * Created by 万洪基 on 2017/3/9.
@@ -19,7 +24,38 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SystemController {
     @Autowired
     SystemService systemService;
+    @Autowired
+    ActivityService activityService;
 
+//    流程
+    @RequiresRoles("1")
+    @RequestMapping("/process/list")
+    @ResponseBody
+    public String processList(){
+        return activityService.processList();
+    }
+
+    @RequiresRoles("1")
+    @RequestMapping("/process/addition")
+    @ResponseBody
+    public String processAddition(@RequestParam("file") CommonsMultipartFile file)throws Exception{
+        return activityService.deployActivityByZip(file.getInputStream());
+    }
+
+    @RequiresRoles("1")
+    @RequestMapping("/process/deletion/{deploymentId}")
+    @ResponseBody
+    public String processDeletion(@PathVariable("deploymentId")String deploymentId){
+        return activityService.deleteProcessByDeploymentId(deploymentId);
+    }
+
+    @RequiresRoles("1")
+    @RequestMapping("/process/ProPng/{deploymentId}/{resourceName}")
+    public void showProcessPng(@PathVariable String deploymentId ,@PathVariable String resourceName , HttpServletResponse response) throws Exception{
+        activityService.showProcessPng(deploymentId,resourceName+".png",response);
+    }
+
+//    字典
     @RequiresRoles("1")
     @RequestMapping("/dictionary/list/{keyword}")
     @ResponseBody

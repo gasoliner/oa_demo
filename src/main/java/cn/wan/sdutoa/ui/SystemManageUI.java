@@ -26,7 +26,14 @@ public class SystemManageUI {
     @RequiresRoles("1")
     @RequestMapping("/noticeManage")
     public String noticeManage(){
+
         return "systemManage/noticeManage";
+    }
+
+    @RequiresRoles("1")
+    @RequestMapping("processManage")
+    public String processManage(){
+        return "systemManage/processManage";
     }
 
 }

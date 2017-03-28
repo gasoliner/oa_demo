@@ -348,3 +348,46 @@ function saveUser() {
         }
     })
 }
+function newProcess() {
+    $("#fm").form("clear");
+    $("#processDialog").dialog("open").dialog("setTitle","流程管理--新建");
+    url = "/system/process/addition";
+}
+function destroyProcess() {
+    var row = $("#dg").datagrid("getSelected");
+    if (row){
+        $.messager.confirm("Confirm","确定要删除这条记录吗",function (r) {
+            if (r){
+                $("#dfm").form("submit",{
+                    url:"/system/process/deletion/"+row.deploymentId,
+                    success: function (res) {
+                        alert(res);
+                        $("#processDialog").dialog("close");
+                        $("#dg").datagrid("reload")
+                    }
+                })
+            }
+        })
+    }
+}
+function saveProcess() {
+    $("#fm").form("submit",{
+        url:url,
+        success: function (res) {
+            alert(res);
+            $("#processDialog").dialog("close");
+            $("#dg").datagrid("reload");
+        }
+    })
+}
+function showProPng(deploymentId,diagramResourceName) {
+    $("#imgDialog").dialog({
+        title:"查看",
+        width: 550,
+        height: 550,
+        closed: false,
+        cache: false,
+        modal: true
+    });
+    $("#imgPro").attr("src","/system/process/ProPng/"+deploymentId+"/"+diagramResourceName);
+}
