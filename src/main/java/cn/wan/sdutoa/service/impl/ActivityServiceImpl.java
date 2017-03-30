@@ -1,7 +1,9 @@
 package cn.wan.sdutoa.service.impl;
 
+import cn.wan.sdutoa.mapper.OfficeMapper;
 import cn.wan.sdutoa.service.ActivityService;
 import cn.wan.sdutoa.util.PageUtil;
+import cn.wan.sdutoa.vo.VoAward;
 import cn.wan.sdutoa.vo.VoProcessDefinition;
 import com.alibaba.fastjson.JSON;
 import org.activiti.engine.RepositoryService;
@@ -17,7 +19,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipInputStream;
 
 /**
@@ -32,6 +36,8 @@ public class ActivityServiceImpl implements ActivityService {
     RuntimeService runtimeService;
     @Autowired
     TaskService taskService;
+    @Autowired
+    OfficeMapper officeMapper;
 
 
 
@@ -87,6 +93,27 @@ public class ActivityServiceImpl implements ActivityService {
             PageUtil.showImg(repositoryService.getResourceAsStream(deploymentId,resourceName),response);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public String startAwardProcess(Long aid) {
+        VoAward voAward = officeMapper.selectAwardByAid(aid);
+        String processDefinitionKey = voAward.getClass().getSimpleName();
+        String businessKey = processDefinitionKey + "." + aid.toString();
+//        设置流程变量
+        Map<String,Object> map = new HashMap<String,Object>();
+//        map.put("",);
+//        map.put("",);
+//        map.put("",);
+        voAward.setState(1);
+        try {
+//            startProcess("imitateOA");
+            runtimeService.startProcessInstanceByKey(processDefinitionKey,businessKey,map);
+            officeMapper.updateAwardState(voAward);
+            return JSON.toJSONString("开始申请成功，请耐心等待审核结果");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JSON.toJSONString("开始申请异常，请稍后再试");
         }
     }
 }

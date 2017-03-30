@@ -26,4 +26,10 @@ public interface PublicService {
 
     public List<VoSystemDDL> getDDLKeywordALL() throws Exception;
 
+    public List<FrontQuery> getCompetition() throws Exception;
+
+    public List<FrontQuery> getAwardLevel() throws Exception;
+
+    public List<FrontQuery> getGrade() throws Exception;
+
 }

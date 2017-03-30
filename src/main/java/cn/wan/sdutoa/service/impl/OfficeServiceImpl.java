@@ -4,10 +4,7 @@ import cn.wan.sdutoa.mapper.OfficeMapper;
 import cn.wan.sdutoa.service.OfficeService;
 import cn.wan.sdutoa.service.PublicService;
 import cn.wan.sdutoa.util.PageUtil;
-import cn.wan.sdutoa.vo.VoQuestionPaper;
-import cn.wan.sdutoa.vo.VoTeachingPaper;
-import cn.wan.sdutoa.vo.VoTopicPaper;
-import cn.wan.sdutoa.vo.VoTrainingPaper;
+import cn.wan.sdutoa.vo.*;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +24,36 @@ public class OfficeServiceImpl implements OfficeService {
     @Autowired
     PublicService publicService;
 
+    //    获奖
+    public String getAwardList() throws Exception {
+        List<VoAward> voAwards = officeMapper.selectAllAward();
+        for (VoAward voAward:
+                voAwards){
+            voAward.setVoCompetition(PageUtil.setCompetitionBycId(voAward.getCompetitionid()));
+            voAward.setVoGrade(PageUtil.setGradeBygId(voAward.getGrade()));
+            voAward.setVoLevel(PageUtil.setAwardLevelBylId(voAward.getLevel()));
+            voAward.setVoState(PageUtil.setAwardStateByasId(voAward.getState()));
+            voAward.setAction(PageUtil.setAwardActionByeId(voAward.getAid().toString()));
+        }
+        return JSON.toJSONString(voAwards);
+    }
+
+    public String addAward(VoAward voAward, CommonsMultipartFile file, HttpServletRequest request) throws Exception {
+        try {
+            String path = PageUtil.uploadAnnex(request,file,voAward.getSchoolyear(),voAward.getAchievement(),"images");
+            voAward.setAnnex(path);
+            voAward.setEmployeenum(PageUtil.getUser().getEmployeenum());
+            voAward.setState(0);
+            System.out.println("service addAward\t"+voAward);
+            officeMapper.insertAward(voAward);
+            return JSON.toJSONString("插入成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return JSON.toJSONString("插入失败，请稍后再试");
+        }
+    }
+
+//    教研论文管理
     public String getTeachingPaperList() throws Exception {
         List<VoTeachingPaper> teachingPaperList = officeMapper.selectAllTeachingPaper();
         for (VoTeachingPaper v:

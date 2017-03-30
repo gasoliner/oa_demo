@@ -1,10 +1,6 @@
 package cn.wan.sdutoa.service;
 
-import cn.wan.sdutoa.util.PageUtil;
-import cn.wan.sdutoa.vo.VoQuestionPaper;
-import cn.wan.sdutoa.vo.VoTeachingPaper;
-import cn.wan.sdutoa.vo.VoTopicPaper;
-import cn.wan.sdutoa.vo.VoTrainingPaper;
+import cn.wan.sdutoa.vo.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +9,11 @@ import javax.servlet.http.HttpServletRequest;
  * Created by 万洪基 on 2017/2/27.
  */
 public interface OfficeService {
+
+//    获奖详情管理
+    public String getAwardList() throws Exception;
+
+    public String addAward(VoAward voAward, CommonsMultipartFile file, HttpServletRequest request) throws Exception;
 
 //    教研论文管理
     public String getTeachingPaperList() throws Exception;

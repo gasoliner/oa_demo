@@ -16,4 +16,6 @@ public interface ActivityService {
 
     public void showProcessPng(String deploymentId, String resourceName, HttpServletResponse response);
 
+    public String startAwardProcess(Long aid);
+
 }

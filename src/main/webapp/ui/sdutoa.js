@@ -391,3 +391,25 @@ function showProPng(deploymentId,diagramResourceName) {
     });
     $("#imgPro").attr("src","/system/process/ProPng/"+deploymentId+"/"+diagramResourceName);
 }
+function newAward() {
+    $("#fm").form("clear");
+    $("#awardDialog").dialog("open").dialog("setTitle","获奖情况--申请");
+    url = "/office/award/addition";
+}
+function saveAward() {
+    $("#fm").form("submit",{
+        url:url,
+        success: function (res) {
+            alert(res);
+            $("#awardDialog").dialog("close");
+            $("#dg").datagrid("reload");
+        }
+    })
+}
+function applyAwardBegin(aid) {
+    $.post("/office/award/beginning",{
+        aid: aid
+    },function (res) {
+        alert(res);
+    })
+}

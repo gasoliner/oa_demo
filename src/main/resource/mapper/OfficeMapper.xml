@@ -258,4 +258,29 @@
         WHERE uuid = #{uuid}
     </delete>
 
+    <insert id="insertAward" parameterType="voAward">
+        INSERT INTO jsj_awards(
+        competitionid,level,grade,specialty,achievement,stuname,classes,teacher,
+        atime,prizeunit,comment,fileNum,schoolYear,state,postil,employeenum,
+        annex
+        ) VALUES (
+        #{competitionid},#{level},#{grade},#{specialty},#{achievement},#{stuname},
+        #{classes},#{teacher},#{atime},#{prizeunit},#{comment},#{fileNum},#{schoolYear},
+        #{state},#{postil},#{employeenum},#{annex}
+        )
+    </insert>
+
+    <select id="selectAllAward" resultType="voAward">
+        SELECT * FROM jsj_awards
+    </select>
+
+    <select id="selectAwardByAid" parameterType="long" resultType="voAward">
+        SELECT * FROM jsj_awards
+        WHERE aid = #{aid}
+    </select>
+
+    <update id="updateAwardState" parameterType="voAward">
+        UPDATE jsj_awards state = #{state}
+        WHERE aid = #{aid}
+    </update>
 </mapper>

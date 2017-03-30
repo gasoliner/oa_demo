@@ -21,7 +21,7 @@
         <%--<div class="easyui-accordion" style="width: auto;height: auto">--%>
             <%--<div title="流程管理" iconCls="icon-cog" style="overflow: auto;padding: 10px;">--%>
                 <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('流程管理','')">流程管理</a><br/>
+                    <a href="#" class="easyui-linkbutton" onclick="addTab('流程管理','system/processManage')">流程管理</a><br/>
                 </div>
                 <%--<div class="menu-last">--%>
                     <%--<a href="#" class="easyui-linkbutton" onclick="addTab('流程部署','')">流程部署</a>--%>
@@ -78,11 +78,11 @@
                     <%--<a href="#" class="easyui-linkbutton" onclick="addTab('获奖申请','awardDetail/addition')">填写获奖申请</a>--%>
                 <%--</div>--%>
                 <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('获奖情况查看','awardDetail/awardDetailManage')">获奖情况管理</a>
+                    <a href="#" class="easyui-linkbutton" onclick="addTab('获奖情况管理','awardDetail/manage')">获奖情况管理</a>
                 </div>
-                <%--<div class="menu-last">--%>
-                    <%--<a href="#" class="easyui-linkbutton" onclick="addTab('获奖情况列表','awardDetail/listAll')">获奖情况列表</a>--%>
-                <%--</div>--%>
+                <div class="menu-last">
+                    <a href="#" class="easyui-linkbutton" onclick="addTab('获奖情况列表','awardDetail/listAll')">获奖情况列表</a>
+                </div>
             </div>
         </div>
     </div>

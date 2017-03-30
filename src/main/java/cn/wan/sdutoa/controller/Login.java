@@ -62,6 +62,9 @@ public class Login {
             session.setAttribute("booklevels",publicService.getBookLevel());
             session.setAttribute("searchtypes",publicService.getSearchType());
             session.setAttribute("keywords",publicService.getDDLKeywordALL());
+            session.setAttribute("competitions",publicService.getCompetition());
+            session.setAttribute("awardLevels",publicService.getAwardLevel());
+            session.setAttribute("grades",publicService.getGrade());
             return session;
         }catch (Exception e){
             e.printStackTrace();

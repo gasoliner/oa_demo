@@ -17,6 +17,18 @@
     <id column="ddlCode" javaType="int" property="stid"/>
     <result column="ddlName" javaType="String" property="searchtype"/>
   </resultMap>
+  <resultMap id="competitionResultMap" type="frontQuery">
+    <id column="ddlCode" javaType="int" property="competitionid"/>
+    <result column="ddlName" javaType="String" property="competition"/>
+  </resultMap>
+  <resultMap id="awardlevelResultMap" type="frontQuery">
+    <id column="ddlCode" javaType="int" property="awardlevelid"/>
+    <result column="ddlName" javaType="String" property="awardlevel"/>
+  </resultMap>
+  <resultMap id="gradeResultMap" type="frontQuery">
+    <id column="ddlCode" javaType="int" property="gradeid"/>
+    <result column="ddlName" javaType="String" property="grade"/>
+  </resultMap>
 
   <select id="getRoleDDL" resultType="role">
     SELECT rid,role FROM jsj_role
@@ -43,7 +55,7 @@
   <select id="getBookLevelDDL" resultMap="bookLevelResultMap">
     SELECT ddlCode,ddlName
     FROM jsj_systemddl
-    WHERE keyword LIKE 'bookLeve'
+    WHERE keyword LIKE 'bookLevel'
   </select>
   <select id="getSearchTypeDDL" resultMap="searchTypeResultMap">
     SELECT ddlCode,ddlName
@@ -62,5 +74,20 @@
     SELECT *
     FROM jsj_systemddl
     WHERE keyword = #{keyword}
+  </select>
+  <select id="getCompetitionDDL" resultMap="competitionResultMap">
+    SELECT ddlCode,ddlName
+    FROM jsj_systemddl
+        WHERE keyword LIKE 'competitionView'
+  </select>
+  <select id="getAwardLevelDL" resultMap="awardlevelResultMap">
+    SELECT ddlCode,ddlName
+    FROM jsj_systemddl
+        WHERE keyword LIKE 'level'
+  </select>
+  <select id="getGradeDDL" resultMap="gradeResultMap">
+    SELECT ddlCode,ddlName
+    FROM jsj_systemddl
+        WHERE keyword LIKE 'grade'
   </select>
 </mapper>

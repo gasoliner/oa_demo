@@ -28,4 +28,11 @@ public interface PublicMapper {
     List<VoSystemDDL> getDDLKeywordALL();
 
     List<VoSystemDDL> getSystemDDLByKeyword(String keyword);
+
+    List<FrontQuery> getCompetitionDDL();
+
+    List<FrontQuery> getAwardLevelDL();
+
+    List<FrontQuery> getGradeDDL();
+
 }

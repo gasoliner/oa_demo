@@ -1,9 +1,6 @@
 package cn.wan.sdutoa.mapper;
 
-import cn.wan.sdutoa.vo.VoQuestionPaper;
-import cn.wan.sdutoa.vo.VoTeachingPaper;
-import cn.wan.sdutoa.vo.VoTopicPaper;
-import cn.wan.sdutoa.vo.VoTrainingPaper;
+import cn.wan.sdutoa.vo.*;
 
 import java.util.List;
 
@@ -11,6 +8,14 @@ import java.util.List;
  * Created by 万洪基 on 2017/2/27.
  */
 public interface OfficeMapper {
+//    获奖情况管理
+    void insertAward(VoAward voAward);
+
+    List<VoAward> selectAllAward();
+
+    VoAward selectAwardByAid(Long aid);
+
+    void updateAwardState(VoAward voAward);
 
 //    教研论文管理
     List<VoTeachingPaper> selectAllTeachingPaper ();

@@ -1,13 +1,9 @@
 package cn.wan.sdutoa.controller;
 
+import cn.wan.sdutoa.service.ActivityService;
 import cn.wan.sdutoa.service.OfficeService;
-import cn.wan.sdutoa.service.PublicService;
 import cn.wan.sdutoa.util.PageUtil;
-import cn.wan.sdutoa.vo.VoQuestionPaper;
-import cn.wan.sdutoa.vo.VoTeachingPaper;
-import cn.wan.sdutoa.vo.VoTopicPaper;
-import cn.wan.sdutoa.vo.VoTrainingPaper;
-import com.alibaba.fastjson.JSON;
+import cn.wan.sdutoa.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +21,22 @@ public class OfficeController {
 
     @Autowired
     OfficeService officeService;
+    @Autowired
+    ActivityService activityService;
+
+//    获奖详情管理
+    @RequestMapping("/award/addition")
+    @ResponseBody
+    public String awardAddition(VoAward voAward, @RequestParam("file")CommonsMultipartFile file, HttpServletRequest request) throws Exception{
+        return officeService.addAward(voAward,file,request);
+    }
+
+    @RequestMapping("/award/beginning")
+    @ResponseBody
+    public String awardBeginning(Long aid){
+        return activityService.startAwardProcess(aid);
+    }
+
 //    教研论文管理
     @RequestMapping("/teachingPaper/list")
     @ResponseBody

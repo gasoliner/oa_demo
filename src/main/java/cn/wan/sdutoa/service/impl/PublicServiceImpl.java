@@ -46,4 +46,16 @@ public class PublicServiceImpl implements PublicService {
     public List<VoSystemDDL> getDDLKeywordALL() throws Exception {
         return publicMapper.getDDLKeywordALL();
     }
+
+    public List<FrontQuery> getCompetition() throws Exception {
+        return publicMapper.getCompetitionDDL();
+    }
+
+    public List<FrontQuery> getAwardLevel() throws Exception {
+        return publicMapper.getAwardLevelDL();
+    }
+
+    public List<FrontQuery> getGrade() throws Exception {
+        return publicMapper.getGradeDDL();
+    }
 }

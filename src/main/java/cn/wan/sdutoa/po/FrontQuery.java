@@ -15,6 +15,12 @@ public class FrontQuery {
     private String booklevel;
     private int stid;
     private String searchtype;
+    private int competitionid;
+    private String competition;
+    private int awardlevelid;
+    private String awardlevel;
+    private int gradeid;
+    private String grade;
 
     public FrontQuery() {
     }
@@ -110,6 +116,55 @@ public class FrontQuery {
     }
 
     public void setSearchtype(String searchtype) {
+
         this.searchtype = searchtype;
+    }
+
+    public int getCompetitionid() {
+        return competitionid;
+    }
+
+    public void setCompetitionid(int competitionid) {
+        this.competitionid = competitionid;
+    }
+
+    public String getCompetition() {
+        return competition;
+    }
+
+    public void setCompetition(String competition) {
+        this.competition = competition;
+    }
+
+    public int getAwardlevelid() {
+        return awardlevelid;
+    }
+
+    public void setAwardlevelid(int awardlevelid) {
+        this.awardlevelid = awardlevelid;
+    }
+
+    public String getAwardlevel() {
+        return awardlevel;
+    }
+
+    public void setAwardlevel(String awardlevel) {
+        this.awardlevel = awardlevel;
+    }
+
+    public int getGradeid() {
+        return gradeid;
+    }
+
+    public void setGradeid(int gradeid) {
+        this.gradeid = gradeid;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 }
