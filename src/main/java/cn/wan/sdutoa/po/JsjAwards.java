@@ -178,6 +178,31 @@ public class JsjAwards {
     }
 
     public void setAnnex(String annex) {
+
         this.annex = annex == null ? null : annex.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "JsjAwards{" +
+                "aid=" + aid +
+                ", competitionid=" + competitionid +
+                ", level=" + level +
+                ", grade=" + grade +
+                ", specialty='" + specialty + '\'' +
+                ", achievement='" + achievement + '\'' +
+                ", stuname='" + stuname + '\'' +
+                ", classes='" + classes + '\'' +
+                ", teacher='" + teacher + '\'' +
+                ", atime='" + atime + '\'' +
+                ", prizeunit='" + prizeunit + '\'' +
+                ", comment='" + comment + '\'' +
+                ", filenum='" + filenum + '\'' +
+                ", schoolyear='" + schoolyear + '\'' +
+                ", state=" + state +
+                ", postil='" + postil + '\'' +
+                ", employeenum='" + employeenum + '\'' +
+                ", annex='" + annex + '\'' +
+                '}';
     }
 }

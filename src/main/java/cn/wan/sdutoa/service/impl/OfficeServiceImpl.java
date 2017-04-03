@@ -1,6 +1,7 @@
 package cn.wan.sdutoa.service.impl;
 
 import cn.wan.sdutoa.mapper.OfficeMapper;
+import cn.wan.sdutoa.service.ActivityService;
 import cn.wan.sdutoa.service.OfficeService;
 import cn.wan.sdutoa.service.PublicService;
 import cn.wan.sdutoa.util.PageUtil;
@@ -16,6 +17,7 @@ import java.util.UUID;
 
 /**
  * Created by 万洪基 on 2017/2/27.
+ * 申请的业务逻辑
  */
 @Service("officeService")
 public class OfficeServiceImpl implements OfficeService {
@@ -23,6 +25,8 @@ public class OfficeServiceImpl implements OfficeService {
     OfficeMapper officeMapper;
     @Autowired
     PublicService publicService;
+    @Autowired
+    ActivityService activityService;
 
     //    获奖
     public String getAwardList() throws Exception {
@@ -33,7 +37,8 @@ public class OfficeServiceImpl implements OfficeService {
             voAward.setVoGrade(PageUtil.setGradeBygId(voAward.getGrade()));
             voAward.setVoLevel(PageUtil.setAwardLevelBylId(voAward.getLevel()));
             voAward.setVoState(PageUtil.setAwardStateByasId(voAward.getState()));
-            voAward.setAction(PageUtil.setAwardActionByeId(voAward.getAid().toString()));
+            System.out.println("voAward :\t"+voAward);
+//            voAward.setAction(PageUtil.setAwardActionByeId(voAward.getAid().toString()));
         }
         return JSON.toJSONString(voAwards);
     }
@@ -45,8 +50,10 @@ public class OfficeServiceImpl implements OfficeService {
             voAward.setEmployeenum(PageUtil.getUser().getEmployeenum());
             voAward.setState(0);
             System.out.println("service addAward\t"+voAward);
-            officeMapper.insertAward(voAward);
-            return JSON.toJSONString("插入成功");
+            voAward.setAid(officeMapper.insertAward(voAward));
+            System.out.println("voAward have aid:\t"+voAward);
+            activityService.startAwardProcess(voAward.getAid());
+            return JSON.toJSONString("录入成功，请继续到“我的任务”办理当前申请");
         }catch (Exception e){
             e.printStackTrace();
             return JSON.toJSONString("插入失败，请稍后再试");

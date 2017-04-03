@@ -21,7 +21,7 @@
 <body>
 <div align="center">
     <table title="获奖情况表" class="easyui-datagrid" style="width: 100%;height:auto"
-           url="/awardDetail/list"
+           url="/office/award/list"
            toolbar="#toolbar"
            rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
@@ -37,8 +37,8 @@
             <th field="atime" width="50">获奖时间</th>
             <th field="prizeunit" width="50">颁奖单位</th>
             <th field="comment" width="50">备注</th>
-            <th field="comments" width="50">状态</th>
-            <th field="action" width="50">操作</th>
+            <th field="voState" width="50">状态</th>
+            <%--<th field="action" width="50">操作</th>--%>
         </tr>
         </thead>
     </table>

@@ -5,12 +5,14 @@ import cn.wan.sdutoa.service.ActivityService;
 import cn.wan.sdutoa.util.PageUtil;
 import cn.wan.sdutoa.vo.VoAward;
 import cn.wan.sdutoa.vo.VoProcessDefinition;
+import cn.wan.sdutoa.vo.VoTask;
 import com.alibaba.fastjson.JSON;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -96,24 +98,46 @@ public class ActivityServiceImpl implements ActivityService {
         }
     }
 
-    public String startAwardProcess(Long aid) {
+    public void startAwardProcess(Long aid) {
         VoAward voAward = officeMapper.selectAwardByAid(aid);
         String processDefinitionKey = voAward.getClass().getSimpleName();
-        String businessKey = processDefinitionKey + "." + aid.toString();
+        String businessKey = processDefinitionKey + "." + voAward.getAid().toString();
 //        设置流程变量
         Map<String,Object> map = new HashMap<String,Object>();
+        map.put("teacherID",PageUtil.getUser().getEmployeenum());
 //        map.put("",);
 //        map.put("",);
-//        map.put("",);
-        voAward.setState(1);
+//        voAward.setState(1);
         try {
 //            startProcess("imitateOA");
             runtimeService.startProcessInstanceByKey(processDefinitionKey,businessKey,map);
-            officeMapper.updateAwardState(voAward);
-            return JSON.toJSONString("开始申请成功，请耐心等待审核结果");
+//            officeMapper.updateAwardState(voAward);
+//            return JSON.toJSONString("开始申请成功，请耐心等待审核结果");
         } catch (Exception e) {
             e.printStackTrace();
-            return JSON.toJSONString("开始申请异常，请稍后再试");
+//            return JSON.toJSONString("开始申请异常，请稍后再试");
+        }
+    }
+
+    public String todoListTaskByAssignee(String assignee) {
+        List<Task> tasks = taskService.createTaskQuery()
+                .taskAssignee(assignee)
+                .orderByTaskCreateTime().asc()
+                .list();
+        if (tasks != null && tasks.size() > 0){
+            List<VoTask> voTasks = new ArrayList<VoTask>();
+            for (Task task:
+                    tasks){
+                VoTask voTask = new VoTask();
+                voTask.setId(task.getId());
+                voTask.setApplyTime(task.getCreateTime());
+                voTask.setOwner(task.getOwner());
+                voTask.setProcessName(task.getProcessInstanceId());
+                voTask.setCurrentActiviti(task.getName());
+            }
+            return JSON.toJSONString(voTasks);
+        }else {
+            return JSON.toJSONString("");
         }
     }
 }

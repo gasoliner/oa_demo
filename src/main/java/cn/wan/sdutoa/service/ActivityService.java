@@ -1,5 +1,7 @@
 package cn.wan.sdutoa.service;
 
+import cn.wan.sdutoa.vo.VoAward;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 
@@ -16,6 +18,8 @@ public interface ActivityService {
 
     public void showProcessPng(String deploymentId, String resourceName, HttpServletResponse response);
 
-    public String startAwardProcess(Long aid);
+    public void startAwardProcess(Long aid);
+
+    public String todoListTaskByAssignee(String assignee);
 
 }

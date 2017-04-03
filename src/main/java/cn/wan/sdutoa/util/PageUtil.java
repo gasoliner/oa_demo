@@ -160,9 +160,9 @@ public class PageUtil {
         }
     }
 
-    public static String setAwardActionByeId(String aId){
-        return  "<a href = \"#\" onclick=\"applyAwardBegin('"+aId+"')\">开始申请</a>";
-    }
+//    public static String setAwardActionByeId(String aId){
+//        return  "<a href = \"#\" onclick=\"applyAwardBegin('"+aId+"')\">开始申请</a>";
+//    }
 
     public static String setVoProcessAction(String deploymentId,String resourceName){
         return  "<a href = \"#\" onclick=\"showProPng('"+deploymentId+"','"+resourceName+"')\">查看</a>";

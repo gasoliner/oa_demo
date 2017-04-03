@@ -12,11 +12,11 @@ public class AwardDetailUI {
 
     @RequestMapping("/manage")
     public String manage(){
-        return "manage";
+        return "personalOffice/awardDetail/manage";
     }
 
     @RequestMapping("/listAll")
     public String listAll(){
-        return "listAll";
+        return "personalOffice/awardDetail/listAll";
     }
 }

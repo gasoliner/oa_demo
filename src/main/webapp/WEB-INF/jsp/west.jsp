@@ -53,10 +53,10 @@
         <div class="easyui-accordion" style="width: auto;height: auto">
             <div title="我的任务" iconCls="icon-computer" style="overflow: auto;padding: 10px;">
                 <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('待办任务','')">待办任务</a>
+                    <a href="#" class="easyui-linkbutton" onclick="addTab('待办任务','myTask/todoTask')">待办任务</a>
                 </div>
                 <div class="menu-last">
-                    <a href="#" class="easyui-linkbutton" onclick="addTab('已办任务','')">已办任务</a>
+                    <a href="#" class="easyui-linkbutton" onclick="addTab('已办任务','myTask/assignedTask')">已办任务</a>
                 </div>
             </div>
             <div title="教务管理" iconCls="icon-computer" style="overflow: auto;padding: 10px;">

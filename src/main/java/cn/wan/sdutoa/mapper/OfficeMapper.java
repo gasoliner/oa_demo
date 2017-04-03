@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface OfficeMapper {
 //    获奖情况管理
-    void insertAward(VoAward voAward);
+    Long insertAward(VoAward voAward);
 
     List<VoAward> selectAllAward();
 

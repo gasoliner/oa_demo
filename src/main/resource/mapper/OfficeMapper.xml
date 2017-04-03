@@ -258,14 +258,14 @@
         WHERE uuid = #{uuid}
     </delete>
 
-    <insert id="insertAward" parameterType="voAward">
+    <insert id="insertAward" parameterType="voAward"  useGeneratedKeys="true" keyProperty="aid">
         INSERT INTO jsj_awards(
         competitionid,level,grade,specialty,achievement,stuname,classes,teacher,
-        atime,prizeunit,comment,fileNum,schoolYear,state,postil,employeenum,
+        atime,prizeunit,comment,filenum,schoolYear,state,postil,employeenum,
         annex
         ) VALUES (
         #{competitionid},#{level},#{grade},#{specialty},#{achievement},#{stuname},
-        #{classes},#{teacher},#{atime},#{prizeunit},#{comment},#{fileNum},#{schoolYear},
+        #{classes},#{teacher},#{atime},#{prizeunit},#{comment},#{filenum},#{schoolyear},
         #{state},#{postil},#{employeenum},#{annex}
         )
     </insert>

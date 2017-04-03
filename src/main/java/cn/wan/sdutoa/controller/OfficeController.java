@@ -24,18 +24,33 @@ public class OfficeController {
     @Autowired
     ActivityService activityService;
 
-//    获奖详情管理
-    @RequestMapping("/award/addition")
+//    我的任务
+    @RequestMapping("/myTask/todoTaskList")
     @ResponseBody
-    public String awardAddition(VoAward voAward, @RequestParam("file")CommonsMultipartFile file, HttpServletRequest request) throws Exception{
-        return officeService.addAward(voAward,file,request);
+    public String todoTaskList() throws Exception{
+        return activityService.todoListTaskByAssignee(PageUtil.getUser().getEmployeenum());
     }
 
-    @RequestMapping("/award/beginning")
+//    获奖详情管理
+    @RequestMapping("/award/list")
     @ResponseBody
-    public String awardBeginning(Long aid){
-        return activityService.startAwardProcess(aid);
+    public String awardList() throws Exception {
+        return officeService.getAwardList();
     }
+
+    @RequestMapping("/award/addition")
+    @ResponseBody
+    public String awardAddition(VoAward voAward, @RequestParam("file")CommonsMultipartFile file, HttpServletRequest request) throws Exception {
+        return officeService.addAward(voAward, file, request);
+    }
+
+
+
+//    @RequestMapping("/award/beginning")
+//    @ResponseBody
+//    public String awardBeginning(Long aid){
+//        return activityService.startAwardProcess(aid);
+//    }
 
 //    教研论文管理
     @RequestMapping("/teachingPaper/list")
