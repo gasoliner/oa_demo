@@ -35,4 +35,6 @@ public interface PublicMapper {
 
     List<FrontQuery> getGradeDDL();
 
+    List<Role> getRoleHaveActiviti();
+
 }

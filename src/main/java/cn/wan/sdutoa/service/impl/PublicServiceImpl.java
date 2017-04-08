@@ -58,4 +58,8 @@ public class PublicServiceImpl implements PublicService {
     public List<FrontQuery> getGrade() throws Exception {
         return publicMapper.getGradeDDL();
     }
+
+    public List<Role> getRoleHaveActiviti() throws Exception {
+        return publicMapper.getRoleHaveActiviti();
+    }
 }

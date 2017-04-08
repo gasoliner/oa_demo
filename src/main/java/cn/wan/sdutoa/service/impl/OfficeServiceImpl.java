@@ -1,18 +1,22 @@
 package cn.wan.sdutoa.service.impl;
 
 import cn.wan.sdutoa.mapper.OfficeMapper;
+import cn.wan.sdutoa.po.AuditingInfo;
 import cn.wan.sdutoa.service.ActivityService;
 import cn.wan.sdutoa.service.OfficeService;
 import cn.wan.sdutoa.service.PublicService;
 import cn.wan.sdutoa.util.PageUtil;
 import cn.wan.sdutoa.vo.*;
 import com.alibaba.fastjson.JSON;
+import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -28,7 +32,60 @@ public class OfficeServiceImpl implements OfficeService {
     @Autowired
     ActivityService activityService;
 
-    //    获奖
+//    办理
+    public String getAwardDetail(String taskId){
+        String awardId = activityService.getAwardIdByTaskId(taskId);
+        VoAward voAward = officeMapper.selectAwardByAid(Long.parseLong(awardId));
+        voAward.setVoCompetition(PageUtil.setCompetitionBycId(voAward.getCompetitionid()));
+        voAward.setVoGrade(PageUtil.setGradeBygId(voAward.getGrade()));
+        voAward.setVoLevel(PageUtil.setAwardLevelBylId(voAward.getLevel()));
+        voAward.setVoState(PageUtil.setAwardStateByasId(voAward.getState()));
+        return JSON.toJSONString(voAward);
+    }
+
+    public String completeAwardTaskByTaskIdForTeacher(VoAward voAward,CommonsMultipartFile file,HttpServletRequest request,String taskId) {
+        String awardId = activityService.getAwardIdByTaskId(taskId);
+        voAward.setAid(Long.parseLong(awardId));
+        try {
+//        更新Award
+            adjustAward(voAward,file,request);
+//        再次提交完成任务
+            activityService.completeAwardTaskByTaskIdForTeacher(taskId);
+            return JSON.toJSONString("完成任务");
+        }catch (Exception e){
+            return JSON.toJSONString("完成任务失败，请稍后再试");
+        }
+    }
+
+    public void adjustAward(VoAward voAward,CommonsMultipartFile file,HttpServletRequest request){
+        String path = PageUtil.uploadAnnex(request,file,voAward.getSchoolyear(),voAward.getAchievement(),"images");
+        voAward.setAnnex(path);
+        voAward.setState(1);
+        try {
+            officeMapper.updateAwardSelective(voAward);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public String completeAwardTaskByTaskIdForAdmin(AuditingInfo auditingInfo, String taskId) {
+        String awardId = activityService.getAwardIdByTaskId(taskId);
+        VoAward voAward = officeMapper.selectAwardByAid(Long.parseLong(awardId));
+        String state;
+        if (auditingInfo.getVoAuditOpinion().equals("同意")){
+            voAward.setState(2);
+            state = "1";
+        }else {
+            voAward.setState(3);
+            state = "0";
+        }
+        voAward.setPostil(auditingInfo.getPostil());
+        officeMapper.updateAwardSelective(voAward);
+        return activityService.completeAwardTaskByTaskIdForAdmin(state,taskId);
+    }
+
+
+    //     获奖
     public String getAwardList() throws Exception {
         List<VoAward> voAwards = officeMapper.selectAllAward();
         for (VoAward voAward:
@@ -48,12 +105,15 @@ public class OfficeServiceImpl implements OfficeService {
             String path = PageUtil.uploadAnnex(request,file,voAward.getSchoolyear(),voAward.getAchievement(),"images");
             voAward.setAnnex(path);
             voAward.setEmployeenum(PageUtil.getUser().getEmployeenum());
-            voAward.setState(0);
-            System.out.println("service addAward\t"+voAward);
+            voAward.setState(1);
+//            System.out.println("service addAward\t"+voAward);
             voAward.setAid(officeMapper.insertAward(voAward));
-            System.out.println("voAward have aid:\t"+voAward);
-            activityService.startAwardProcess(voAward.getAid());
-            return JSON.toJSONString("录入成功，请继续到“我的任务”办理当前申请");
+//            System.out.println("voAward have aid:\t"+voAward);
+            String taskId = activityService.startAwardProcess(voAward.getAid());
+//            System.out.println("addAward\ttaskId\t"+taskId);
+//            默认替当前用户完成任务
+            activityService.completeAwardTaskByTaskIdForTeacher(taskId);
+            return JSON.toJSONString("录入成功");
         }catch (Exception e){
             e.printStackTrace();
             return JSON.toJSONString("插入失败，请稍后再试");

@@ -3,6 +3,8 @@ package cn.wan.sdutoa.service.impl;
 import cn.wan.sdutoa.mapper.JsjUserMapper;
 import cn.wan.sdutoa.po.FrontQuery;
 import cn.wan.sdutoa.po.JsjUser;
+import cn.wan.sdutoa.po.Role;
+import cn.wan.sdutoa.service.PublicService;
 import cn.wan.sdutoa.service.UserService;
 import cn.wan.sdutoa.util.PageUtil;
 import cn.wan.sdutoa.vo.VoUser;
@@ -20,8 +22,12 @@ import java.util.Set;
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
+
     @Autowired
     JsjUserMapper jsjUserMapper;
+    @Autowired
+    PublicService publicService;
+
     public List<VoUser> userList(int page, int pageSize) throws Exception {
         return jsjUserMapper.selectAllUser(new FrontQuery((page-1)*pageSize,pageSize));
     }
@@ -85,4 +91,15 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    public List<String> getUserNameHaveActiviti() throws Exception {
+        List<Role> roleList = publicService.getRoleHaveActiviti();
+        List<String> userNameHaveActivitis = new ArrayList<String>();
+        for (Role role:
+                roleList){
+            userNameHaveActivitis.addAll(jsjUserMapper.getUserNameHaveActivitiByRole(role.getRid().toString()));
+        }
+        return userNameHaveActivitis;
+    }
+
 }

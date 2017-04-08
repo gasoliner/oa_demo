@@ -1,9 +1,14 @@
 package cn.wan.sdutoa.controller;
 
+import cn.wan.sdutoa.po.AuditingInfo;
 import cn.wan.sdutoa.service.ActivityService;
 import cn.wan.sdutoa.service.OfficeService;
 import cn.wan.sdutoa.util.PageUtil;
 import cn.wan.sdutoa.vo.*;
+import com.alibaba.fastjson.JSON;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,10 +30,53 @@ public class OfficeController {
     ActivityService activityService;
 
 //    我的任务
+
+    @RequestMapping("/myTask/claiming")
+    @ResponseBody
+    public String claimTask(String taskId){
+        return activityService.claimTask(PageUtil.getUser().getUsername(),taskId);
+    }
+
+    @RequestMapping("/myTask/user_completion/{taskId}")
+    @ResponseBody
+    public String completeAwardTaskForUser(VoAward voAward,@RequestParam("file") CommonsMultipartFile file, HttpServletRequest request,@PathVariable String taskId){
+        return officeService.completeAwardTaskByTaskIdForTeacher(voAward,file,request,taskId);
+    }
+
+    /**
+     * 备注：
+     *      此处在修改完赋予权限后应更改为subject.isPermitted("activiti:*");
+     * */
+    @RequiresRoles("1")
+    @RequestMapping("/myTask/act_completion/{taskId}")
+    @ResponseBody
+    public String completeTask(AuditingInfo auditingInfo,@PathVariable String taskId){
+        return officeService.completeAwardTaskByTaskIdForAdmin(auditingInfo, taskId);
+    }
+
+    @RequestMapping("/myTask/sequenceFlow/{taskId}")
+    @ResponseBody
+    public String getTaskSequenceFlow(@PathVariable String taskId){
+        return JSON.toJSONString(activityService.getSequenceFlowName(taskId));
+    }
+
     @RequestMapping("/myTask/todoTaskList")
     @ResponseBody
     public String todoTaskList() throws Exception{
-        return activityService.todoListTaskByAssignee(PageUtil.getUser().getEmployeenum());
+        return activityService.todoListTaskByAssignee(PageUtil.getUser().getUsername());
+    }
+
+    @RequestMapping("/myTask/taskInfo/{taskId}")
+    @ResponseBody
+    public String getTaskInfo(@PathVariable String taskId){
+
+        return officeService.getAwardDetail(taskId);
+    }
+
+    @RequestMapping("/myTask/hisTaskList")
+    @ResponseBody
+    public String getHistoryTask(){
+        return activityService.getHistoryTask(PageUtil.getUser().getUsername());
     }
 
 //    获奖详情管理
@@ -91,7 +139,6 @@ public class OfficeController {
     @RequestMapping("/topicPaper/addition")
     @ResponseBody
     public String topicPaperAddition(VoTopicPaper voTopicPaper) throws Exception {
-        System.out.println("Controller:\t"+voTopicPaper);
         return officeService.addTopicPaper(voTopicPaper);
     }
     @RequestMapping("/topicPaper/updates/{uuid}")
@@ -151,4 +198,7 @@ public class OfficeController {
     public String testPaperDeletion(@PathVariable("qid")int qid) throws Exception {
         return officeService.deleteTestPaperById(qid);
     }
+
+
+
 }

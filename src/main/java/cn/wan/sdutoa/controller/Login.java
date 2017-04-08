@@ -49,7 +49,7 @@ public class Login {
     @RequestMapping("/logout")
     @ResponseBody
     public void logout(HttpSession session){
-//        session.removeAttribute(ContantKey.GLOBLE_USER_INFO);
+        session.removeAttribute(ContantKey.GLOBLE_USER_INFO);
         session.invalidate();
         return;
     }

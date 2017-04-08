@@ -25,4 +25,6 @@ public interface UserService {
     public Set<String> getRolesByEmployee(String em);
 
     public Set<String> getPermissionsByEmployee(String em);
+
+    public List<String> getUserNameHaveActiviti() throws Exception;
 }

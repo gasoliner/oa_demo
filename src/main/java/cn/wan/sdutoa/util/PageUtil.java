@@ -155,7 +155,7 @@ public class PageUtil {
             case 0: return "初始录入";
             case 1: return "审核中";
             case 2: return "同意";
-            case 3: return "不同意";
+            case 3: return "驳回";
             default: return null;
         }
     }

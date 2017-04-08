@@ -1,5 +1,6 @@
 package cn.wan.sdutoa.service;
 
+import cn.wan.sdutoa.po.AuditingInfo;
 import cn.wan.sdutoa.vo.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -9,6 +10,13 @@ import javax.servlet.http.HttpServletRequest;
  * Created by 万洪基 on 2017/2/27.
  */
 public interface OfficeService {
+
+//    我的任务
+    public String getAwardDetail(String taskId);
+
+    public String completeAwardTaskByTaskIdForTeacher(VoAward voAward, CommonsMultipartFile file,HttpServletRequest request,String taskId);
+
+    public String completeAwardTaskByTaskIdForAdmin(AuditingInfo auditingInfo, String taskId);
 
 //    获奖详情管理
     public String getAwardList() throws Exception;

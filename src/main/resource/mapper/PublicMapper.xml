@@ -90,4 +90,8 @@
     FROM jsj_systemddl
         WHERE keyword LIKE 'grade'
   </select>
+
+  <select id="getRoleHaveActiviti" resultType="role">
+    SELECT * FROM jsj_role WHERE rid LIKE '%1%'
+  </select>
 </mapper>

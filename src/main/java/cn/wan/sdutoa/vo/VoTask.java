@@ -21,6 +21,48 @@ public class VoTask {
     @JSONField(format = "yyyy-MM-dd")
     private Date applyTime;
 
+    private String voAction;
+
+    @JSONField(format = "yyyy-MM-dd")
+    private Date startTime;
+
+    @JSONField(format = "yyyy-MM-dd")
+    private Date endTime;
+
+    private String assignee;
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
+
+    public String getVoAction() {
+        return voAction;
+    }
+
+    public void setVoAction(String voAction) {
+        this.voAction = voAction;
+    }
+
     public String getId() {
         return id;
     }
@@ -58,6 +100,22 @@ public class VoTask {
     }
 
     public void setApplyTime(Date applyTime) {
+
         this.applyTime = applyTime;
+    }
+
+    @Override
+    public String toString() {
+        return "VoTask{" +
+                "id='" + id + '\'' +
+                ", processName='" + processName + '\'' +
+                ", currentActiviti='" + currentActiviti + '\'' +
+                ", owner='" + owner + '\'' +
+                ", applyTime=" + applyTime +
+                ", voAction='" + voAction + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", assignee='" + assignee + '\'' +
+                '}';
     }
 }

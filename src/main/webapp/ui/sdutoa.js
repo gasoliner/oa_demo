@@ -406,10 +406,51 @@ function saveAward() {
         }
     })
 }
-function applyAwardBegin(aid) {
-    $.post("/office/award/beginning",{
-        aid: aid
-    },function (res) {
-        alert(res);
+//
+// function applyAwardBegin(aid) {
+//     $.post("/office/award/beginning",{
+//         aid: aid
+//     },function (res) {
+//         alert(res);
+//     })
+// }
+function doTask() {
+    var row = $("#dg").datagrid("getSelected");
+    if (row && row.voAction == null){
+        $.get("/office/myTask/taskInfo/"+row.id,null,function (res) {
+            $("#taskDialog").dialog("open").dialog("setTitle","任务办理");
+            if ($("#state").length != 0){
+                alert("be state");
+                $("#fm1").form("load",res);
+                $('#state').combobox({
+                    url:'/office/myTask/sequenceFlow/'+row.id,
+                    valueField:'voAuditOpinion',
+                    textField:'voAuditOpinion'
+                });
+                url = "/office/myTask/act_completion/"+row.id;
+            }else {
+                alert("no state");
+                $("#fm").form("load",res);
+                $("#fm1").form("load",res);
+                url = "/office/myTask/user_completion/"+row.id;
+            }
+        })
+    }
+}
+function completeTask() {
+    $("#fm").form("submit",{
+        url:url,
+        success:function (res) {
+            alert(res);
+            $("#taskDialog").dialog("close");
+            $("#dg").datagrid("reload");
+        }
+    })
+}
+function claimTask(taskId) {
+    $.post("/office/myTask/claiming",{
+        taskId:taskId
+    },function () {
+        $("#dg").datagrid("reload");
     })
 }

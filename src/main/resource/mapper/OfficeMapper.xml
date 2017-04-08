@@ -279,8 +279,61 @@
         WHERE aid = #{aid}
     </select>
 
-    <update id="updateAwardState" parameterType="voAward">
-        UPDATE jsj_awards state = #{state}
+    <update id="updateAwardSelective" parameterType="voAward">
+        UPDATE jsj_awards
+        <set>
+            <if test="competitionid != null">
+                competitionid = #{competitionid},
+            </if>
+            <if test="level != null">
+                level = #{level},
+            </if>
+            <if test="grade != null">
+                grade = #{grade},
+            </if>
+            <if test="specialty != null">
+                specialty = #{specialty},
+            </if>
+            <if test="achievement != null">
+                achievement = #{achievement},
+            </if>
+            <if test="stuname != null">
+                stuname = #{stuname},
+            </if>
+            <if test="classes != null">
+                classes = #{classes},
+            </if>
+            <if test="teacher != null">
+                teacher = #{teacher},
+            </if>
+            <if test="atime != null">
+                atime = #{atime},
+            </if>
+            <if test="prizeunit != null">
+                prizeunit = #{prizeunit},
+            </if>
+            <if test="comment != null">
+                comment = #{comment},
+            </if>
+            <if test="filenum != null">
+                filenum = #{filenum},
+            </if>
+            <if test="schoolyear != null">
+                schoolyear = #{schoolyear},
+            </if>
+            <if test="state != null">
+                state = #{state},
+            </if>
+            <if test="postil != null">
+                postil = #{postil},
+            </if>
+            <if test="employeenum != null">
+                employeenum = #{employeenum},
+            </if>
+            <if test="annex != null">
+                annex = #{annex},
+            </if>
+        </set>
         WHERE aid = #{aid}
     </update>
 </mapper>

@@ -15,7 +15,7 @@ public interface OfficeMapper {
 
     VoAward selectAwardByAid(Long aid);
 
-    void updateAwardState(VoAward voAward);
+    void updateAwardSelective(VoAward voAward);
 
 //    教研论文管理
     List<VoTeachingPaper> selectAllTeachingPaper ();

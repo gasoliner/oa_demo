@@ -339,4 +339,10 @@
       WHERE jsj_user.employeenum = #{employee}
       )
   </select>
+
+  <select id="getUserNameHaveActivitiByRole" parameterType="string" resultType="string">
+    SELECT jsj_user.username
+    FROM jsj_user
+    WHERE jsj_user.roleIdsStr = #{roleId}
+  </select>
 </mapper>

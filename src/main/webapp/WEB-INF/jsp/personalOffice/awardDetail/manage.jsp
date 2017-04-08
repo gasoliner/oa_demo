@@ -20,10 +20,14 @@
 </head>
 <body>
 <div align="center">
-    <table title="获奖情况表" class="easyui-datagrid" style="width: 100%;height:auto"
-           url="/office/award/list"
+    <table id="dg" title="获奖情况表" class="easyui-datagrid" style="width: 100%;height:auto"
            toolbar="#toolbar"
-           rownumbers="true" fitColumns="true" singleSelect="true">
+           fitColumns="true" singleSelect="true" pagination="true"
+           data-options="rownumbers:true,
+           url:'/office/award/list',
+           method:'get',
+           pageSize:15,
+           pageList:[5,10,15,20,25]">
         <thead>
         <tr>
             <th field="voCompetition" width="50">竞赛项目</th>
@@ -38,7 +42,6 @@
             <th field="prizeunit" width="50">颁奖单位</th>
             <th field="comment" width="50">备注</th>
             <th field="voState" width="50">状态</th>
-            <%--<th field="action" width="50">操作</th>--%>
         </tr>
         </thead>
     </table>

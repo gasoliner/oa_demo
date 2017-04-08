@@ -42,4 +42,6 @@ public interface JsjUserMapper {
     String getRolesByEmployee(String employee);
 
     String getPermissionByEmployee(String employee);
+
+    List<String> getUserNameHaveActivitiByRole(String roleId);
 }

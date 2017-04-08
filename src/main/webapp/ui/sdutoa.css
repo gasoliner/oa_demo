@@ -21,6 +21,10 @@
     max-width: 350px;
     max-height: 100px;
 }
+.oa_form{
+    margin:0;
+    padding:10px 30px;
+}
 #fm{
     margin:0;
     padding:10px 30px;

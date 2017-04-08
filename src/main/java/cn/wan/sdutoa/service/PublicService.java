@@ -32,4 +32,6 @@ public interface PublicService {
 
     public List<FrontQuery> getGrade() throws Exception;
 
+    public List<Role> getRoleHaveActiviti() throws Exception;
+
 }
